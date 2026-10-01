@@ -1,10 +1,10 @@
 # STATE: Mutual Fund Top-10 Holdings Tracker
 
 ## Current Phase
-Phase 5 (Dashboard) — **COMPLETED**
+Phase 6 (LLM Summary) — **PLAN READY**
 
 ## Next Action
-Begin Phase 6: LLM Summary (Pluggable providers, strict number verification, fallback)
+Execute Phase 6 (Implement Tasks 1 through 4 according to `.planning/phases/06-llm-summary/PLAN.md`)
 
 ## Decisions Log
 | # | Decision | Rationale | Date |
@@ -23,6 +23,8 @@ Begin Phase 6: LLM Summary (Pluggable providers, strict number verification, fal
 | 12 | Dedicated pipeline runner script | `pipeline/run.py` isolates automation logic from GitHub Actions YAML, enabling local testability | 2026-10-02 |
 | 13 | Targeted publication window cron | `30 0,12 3-20 * *` (days 3–20, 6 AM & 6 PM IST) aligns with Indian AMC monthly release cycles | 2026-10-02 |
 | 14 | Pre-computed JSON data loader | `web/src/lib/data.ts` loads static JSON from filesystem; prebuild script mirrors `data/` for Vercel Hobby zero-config deployment | 2026-10-02 |
+| 15 | Strict number verification post-check | Extract every numeric token from LLM text and verify existence in diff JSON within ±0.05pp tolerance | 2026-10-02 |
+| 16 | Deterministic template fallback | Pure Python fallback guarantee ensuring pipeline never crashes on API failure or quota exhaustion | 2026-10-02 |
 
 ## Open Questions
 _None currently._
