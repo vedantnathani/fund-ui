@@ -1,0 +1,89 @@
+name: Mutual Fund Data Pipeline
+
+on:
+  schedule:
+    # Runs twice daily at 6:00 AM IST (00:30 UTC) and 6:00 PM IST (12:30 UTC)
+    # during days 3-20 of each month (AMC factsheet publication window)
+    - cron: '30 0,12 3-20 * *'
+
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force re-download and re-parse latest month'
+        required: false
+        type: boolean
+        default: false
+      fund_id:
+        description: 'Specific fund ID to process (or "all")'
+        required: false
+        type: string
+        default: 'all'
+      dry_run:
+        description: 'Simulate run without writing or committing files'
+        required: false
+        type: boolean
+        default: false
+
+  push:
+    branches:
+      - main
+    paths:
+      - 'pipeline/**'
+      - 'config/**'
+      - 'requirements.txt'
+      - '.github/workflows/pipeline.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    name: Check, Parse, Diff & Commit
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run test suite
+        run: |
+          pytest pipeline/tests/ -v
+
+      - name: Execute Pipeline Runner
+        id: pipeline_step
+        run: |
+          ARGS=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ "${{ github.event.inputs.force }}" = "true" ]; then
+              ARGS="$ARGS --force"
+            fi
+            if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+              ARGS="$ARGS --dry-run"
+            fi
+            if [ -n "${{ github.event.inputs.fund_id }}" ] && [ "${{ github.event.inputs.fund_id }}" != "all" ]; then
+              ARGS="$ARGS --fund-id ${{ github.event.inputs.fund_id }}"
+            fi
+          fi
+          python pipeline/run.py $ARGS
+
+      - name: Commit and push updated data
+        if: steps.pipeline_step.outputs.new_data == 'true' && github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git commit -m "chore(data): update mutual fund holdings [skip ci]"
+          git push origin main
