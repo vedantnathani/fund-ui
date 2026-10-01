@@ -92,18 +92,15 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Only commit if there are actual changes
-          if git diff --quiet data/ && git ls-files --others --exclude-standard data/ | grep -q .; then
-            echo "No new data files to commit."
+          # Stage all data changes (new files + modifications)
+          git add data/
+          # Only commit if something was actually staged
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(data): backfill ${{ inputs.fund_id }} ${{ inputs.start_month }}-${{ inputs.end_month }} [skip ci]"
+            git push origin main
+            echo "Data committed and pushed."
           else
-            git add data/
-            if ! git diff --cached --quiet; then
-              git commit -m "chore(data): backfill ${{ inputs.fund_id }} ${{ inputs.start_month }}-${{ inputs.end_month }} [skip ci]"
-              git push origin main
-              echo "Data committed and pushed."
-            else
-              echo "No staged changes to commit."
-            fi
+            echo "No new data files to commit."
           fi
 
       - name: Summary

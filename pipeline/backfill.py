@@ -186,111 +186,132 @@ def run_fixtures_backfill(
 
 
 def run_online_backfill(
-    fund_id: str = "ppfas-flexicap",
+    fund_id: str = "all",
     start_month: Optional[str] = None,
     end_month: Optional[str] = None,
     # Legacy param kept for backwards compatibility; ignored when start_month is provided
     months_count: int = 12,
     data_dir: str = "data",
     cache_dir: str = "data/cache",
+    config_path: str = "config/funds.json",
     dry_run: bool = False,
 ) -> None:
     """
     Backfill by scraping live download links, filtered to [start_month, end_month].
 
+    Supports fund_id='all' to iterate over every enabled fund in config/funds.json.
+
     Args:
-        fund_id: Target fund ID.
+        fund_id: Target fund ID, or 'all' for every enabled fund.
         start_month: Earliest month to backfill (YYYY-MM, inclusive).
         end_month: Latest month to backfill (YYYY-MM, inclusive).
         months_count: Legacy — number of most recent months (ignored when start_month given).
         data_dir: Root data directory.
         cache_dir: Directory to cache downloaded files.
+        config_path: Path to funds config JSON.
         dry_run: If True, simulate without writing files.
     """
     # Resolve date range
     resolved_end = end_month or _current_month()
     resolved_start = start_month or _default_start_month(months_count)
 
+    # Resolve target funds — support 'all'
+    with open(config_path, "r", encoding="utf-8") as f:
+        all_funds: List[Dict[str, Any]] = json.load(f)
+
+    if fund_id and fund_id != "all":
+        target_funds = [f for f in all_funds if f.get("id") == fund_id]
+        if not target_funds:
+            raise ValueError(f"No fund matched fund_id '{fund_id}'. Registered: {[f['id'] for f in all_funds]}")
+    else:
+        target_funds = [f for f in all_funds if f.get("enabled", True)]
+
     logger.info(
-        f"Starting online backfill for '{fund_id}' in range [{resolved_start}, {resolved_end}]..."
+        f"Starting online backfill for {len(target_funds)} fund(s) "
+        f"in range [{resolved_start}, {resolved_end}]..."
     )
-    orchestrator = ParserOrchestrator()
+
+    orchestrator = ParserOrchestrator(config_path=config_path)
     diff_engine = DiffEngine(significant_threshold_pp=0.5)
-    fund = orchestrator.get_fund(fund_id)
-
     scraper = Scraper()
-    html = scraper.fetch_page(fund["source_page"])
-    discovered = scraper.discover_ppfas_links(html, fund["source_page"])
 
-    # Filter discovered months to requested range
-    valid_months = set(month_range(resolved_start, resolved_end))
-    targets = [item for item in discovered if item["month"] in valid_months]
-    logger.info(
-        f"Filtered to {len(targets)} months in range [{resolved_start}, {resolved_end}] "
-        f"(from {len(discovered)} discovered)"
-    )
+    for fund in target_funds:
+        fid = fund["id"]
+        logger.info(f"\n=== Processing fund: {fid} ({fund.get('name', '')}) ===")
 
-    fund_cache_dir = Path(cache_dir) / fund_id
-    target_data_dir = Path(data_dir) / fund_id
-    if not dry_run:
-        fund_cache_dir.mkdir(parents=True, exist_ok=True)
-        target_data_dir.mkdir(parents=True, exist_ok=True)
+        html = scraper.fetch_page(fund["source_page"])
+        discovered = scraper.discover_ppfas_links(html, fund["source_page"])
 
-    snapshots: Dict[str, Dict[str, Any]] = {}
+        # Filter discovered months to requested range
+        valid_months = set(month_range(resolved_start, resolved_end))
+        targets = [item for item in discovered if item["month"] in valid_months]
+        logger.info(
+            f"Filtered to {len(targets)} months in range [{resolved_start}, {resolved_end}] "
+            f"(from {len(discovered)} discovered)"
+        )
 
-    for item in targets:
-        m = item["month"]
-        snap_file = target_data_dir / f"{m}.json"
-
-        # Idempotency: load existing snapshots from disk instead of re-downloading
-        if snap_file.exists():
-            logger.info(f"Snapshot {snap_file} already exists — loading from disk, skipping re-download.")
-            with open(snap_file, "r", encoding="utf-8") as f:
-                snapshots[m] = json.load(f)
-            continue
-
-        logger.info(f"--- Processing {m} ---")
-        excel_path = None
-        pdf_path = None
-
-        if item["excel_url"]:
-            excel_path = fund_cache_dir / f"portfolio-disclosure-{m}.xls"
-            if not dry_run:
-                scraper.download_file(item["excel_url"], excel_path)
-
-        if item["pdf_url"]:
-            pdf_path = fund_cache_dir / f"factsheet-{m}.pdf"
-            if not dry_run:
-                scraper.download_file(item["pdf_url"], pdf_path)
-
+        fund_cache_dir = Path(cache_dir) / fid
+        target_data_dir = Path(data_dir) / fid
         if not dry_run:
-            try:
-                snap = orchestrator.parse_with_fallback(
-                    fund_id=fund_id,
-                    excel_path=excel_path,
-                    pdf_path=pdf_path,
-                    source_url=item["excel_url"] or item["pdf_url"],
-                )
-                snapshots[m] = snap
-                with open(snap_file, "w", encoding="utf-8") as f:
-                    json.dump(snap, f, indent=2)
-                logger.info(f"Saved snapshot {snap_file}")
-            except Exception as e:
-                logger.error(f"Failed to process month {m}: {e}")
+            fund_cache_dir.mkdir(parents=True, exist_ok=True)
+            target_data_dir.mkdir(parents=True, exist_ok=True)
 
-    # Chronological diff generation
-    sorted_months = sorted(snapshots.keys())
-    for i in range(1, len(sorted_months)):
-        curr_m = sorted_months[i]
-        prev_m = sorted_months[i - 1]
-        try:
-            diff = diff_engine.compute_diff(snapshots[curr_m], snapshots[prev_m])
-            diff_file = target_data_dir / f"{curr_m}.diff.json"
-            with open(diff_file, "w", encoding="utf-8") as f:
-                json.dump(diff, f, indent=2)
-            logger.info(f"Saved diff: {diff_file}")
-        except Exception as e:
-            logger.error(f"Failed to compute diff for {curr_m} vs {prev_m}: {e}")
+        snapshots: Dict[str, Dict[str, Any]] = {}
+
+        for item in targets:
+            m = item["month"]
+            snap_file = target_data_dir / f"{m}.json"
+
+            # Idempotency: load existing snapshots from disk instead of re-downloading
+            if snap_file.exists():
+                logger.info(f"Snapshot {snap_file} already exists — loading from disk, skipping re-download.")
+                with open(snap_file, "r", encoding="utf-8") as f:
+                    snapshots[m] = json.load(f)
+                continue
+
+            logger.info(f"--- Processing {m} ---")
+            excel_path = None
+            pdf_path = None
+
+            if item["excel_url"]:
+                excel_path = fund_cache_dir / f"portfolio-disclosure-{m}.xls"
+                if not dry_run:
+                    scraper.download_file(item["excel_url"], excel_path)
+
+            if item["pdf_url"]:
+                pdf_path = fund_cache_dir / f"factsheet-{m}.pdf"
+                if not dry_run:
+                    scraper.download_file(item["pdf_url"], pdf_path)
+
+            if not dry_run:
+                try:
+                    snap = orchestrator.parse_with_fallback(
+                        fund_id=fid,
+                        excel_path=excel_path,
+                        pdf_path=pdf_path,
+                        source_url=item["excel_url"] or item["pdf_url"],
+                    )
+                    snapshots[m] = snap
+                    with open(snap_file, "w", encoding="utf-8") as f:
+                        json.dump(snap, f, indent=2)
+                    logger.info(f"Saved snapshot {snap_file}")
+                except Exception as e:
+                    logger.error(f"Failed to process month {m} for {fid}: {e}")
+
+        # Chronological diff generation
+        sorted_months = sorted(snapshots.keys())
+        for i in range(1, len(sorted_months)):
+            curr_m = sorted_months[i]
+            prev_m = sorted_months[i - 1]
+            try:
+                diff = diff_engine.compute_diff(snapshots[curr_m], snapshots[prev_m])
+                diff_file = target_data_dir / f"{curr_m}.diff.json"
+                if not dry_run:
+                    with open(diff_file, "w", encoding="utf-8") as f:
+                        json.dump(diff, f, indent=2)
+                    logger.info(f"Saved diff: {diff_file}")
+            except Exception as e:
+                logger.error(f"Failed to compute diff for {curr_m} vs {prev_m} ({fid}): {e}")
 
     if not dry_run:
         build_index(data_dir=data_dir, out_path=f"{data_dir}/index.json")
