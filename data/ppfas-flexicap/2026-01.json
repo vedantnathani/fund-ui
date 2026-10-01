@@ -1,0 +1,92 @@
+{
+  "fund_id": "ppfas-flexicap",
+  "fund_name": "Parag Parikh Flexi Cap Fund",
+  "as_of": "2026-01-31",
+  "source_url": "https://amc.ppfas.com/downloads/portfolio-disclosure/2026/PPFAS_Monthly_Portfolio_Report_January_31_2026.xls?10022026",
+  "source_type": "excel",
+  "file_sha256": "3af9bf64ec47d19862baf0011813a15fb84367eccaa4714c0415ef30a28e647c",
+  "top10_total_pct": 49.28,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "INE040A01034",
+      "name": "HDFC Bank Ltd.",
+      "isin": "INE040A01034",
+      "sector": "Banks",
+      "weight_pct": 8.04
+    },
+    {
+      "rank": 2,
+      "key": "INE752E01010",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": "INE752E01010",
+      "sector": "Power",
+      "weight_pct": 6.0
+    },
+    {
+      "rank": 3,
+      "key": "INE522F01014",
+      "name": "Coal India Ltd.",
+      "isin": "INE522F01014",
+      "sector": "Consumable Fuels",
+      "weight_pct": 5.26
+    },
+    {
+      "rank": 4,
+      "key": "INE154A01025",
+      "name": "ITC Ltd.",
+      "isin": "INE154A01025",
+      "sector": "Diversified FMCG",
+      "weight_pct": 5.05
+    },
+    {
+      "rank": 5,
+      "key": "INE090A01021",
+      "name": "ICICI Bank Ltd.",
+      "isin": "INE090A01021",
+      "sector": "Banks",
+      "weight_pct": 4.99
+    },
+    {
+      "rank": 6,
+      "key": "INE118A01012",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": "INE118A01012",
+      "sector": "Finance",
+      "weight_pct": 4.82
+    },
+    {
+      "rank": 7,
+      "key": "US02079K3059",
+      "name": "Alphabet Inc.",
+      "isin": "US02079K3059",
+      "sector": "Computer Software: Programming, Data Processing",
+      "weight_pct": 4.39
+    },
+    {
+      "rank": 8,
+      "key": "INE237A01036",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "isin": "INE237A01036",
+      "sector": "Banks",
+      "weight_pct": 3.75
+    },
+    {
+      "rank": 9,
+      "key": "INE101A01026",
+      "name": "Mahindra & Mahindra Ltd.",
+      "isin": "INE101A01026",
+      "sector": "Automobiles",
+      "weight_pct": 3.58
+    },
+    {
+      "rank": 10,
+      "key": "INE238A01034",
+      "name": "Axis Bank Ltd.",
+      "isin": "INE238A01034",
+      "sector": "Banks",
+      "weight_pct": 3.4
+    }
+  ]
+}

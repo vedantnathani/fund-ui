@@ -1,0 +1,92 @@
+{
+  "fund_id": "ppfas-flexicap",
+  "fund_name": "Parag Parikh Flexi Cap Fund",
+  "as_of": "2025-10-31",
+  "source_url": "https://amc.ppfas.com/downloads/portfolio-disclosure/2025/PPFAS_Monthly_Portfolio_Report_October_31_2025.xls",
+  "source_type": "excel",
+  "file_sha256": "81b88a5e35fbe977e99676328133c3aa73f76c1eb2846077e71a2c59be45fc0d",
+  "top10_total_pct": 48.22,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "INE040A01034",
+      "name": "HDFC Bank Ltd.",
+      "isin": "INE040A01034",
+      "sector": "Banks",
+      "weight_pct": 8.02
+    },
+    {
+      "rank": 2,
+      "key": "INE752E01010",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": "INE752E01010",
+      "sector": "Power",
+      "weight_pct": 6.0
+    },
+    {
+      "rank": 3,
+      "key": "INE118A01012",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": "INE118A01012",
+      "sector": "Finance",
+      "weight_pct": 5.2
+    },
+    {
+      "rank": 4,
+      "key": "INE522F01014",
+      "name": "Coal India Ltd.",
+      "isin": "INE522F01014",
+      "sector": "Consumable Fuels",
+      "weight_pct": 5.01
+    },
+    {
+      "rank": 5,
+      "key": "INE154A01025",
+      "name": "ITC Ltd.",
+      "isin": "INE154A01025",
+      "sector": "Diversified FMCG",
+      "weight_pct": 4.64
+    },
+    {
+      "rank": 6,
+      "key": "INE090A01021",
+      "name": "ICICI Bank Ltd.",
+      "isin": "INE090A01021",
+      "sector": "Banks",
+      "weight_pct": 4.63
+    },
+    {
+      "rank": 7,
+      "key": "INE237A01028",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "isin": "INE237A01028",
+      "sector": "Banks",
+      "weight_pct": 4.04
+    },
+    {
+      "rank": 8,
+      "key": "US02079K3059",
+      "name": "Alphabet Inc.",
+      "isin": "US02079K3059",
+      "sector": "Computer Software: Programming, Data Processing",
+      "weight_pct": 3.75
+    },
+    {
+      "rank": 9,
+      "key": "INE585B01010",
+      "name": "Maruti Suzuki India Ltd.",
+      "isin": "INE585B01010",
+      "sector": "Automobiles",
+      "weight_pct": 3.47
+    },
+    {
+      "rank": 10,
+      "key": "INE397D01024",
+      "name": "Bharti Airtel Ltd.",
+      "isin": "INE397D01024",
+      "sector": "Telecom - Services",
+      "weight_pct": 3.46
+    }
+  ]
+}

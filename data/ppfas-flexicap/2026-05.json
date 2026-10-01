@@ -1,0 +1,92 @@
+{
+  "fund_id": "ppfas-flexicap",
+  "fund_name": "Parag Parikh Flexi Cap Fund",
+  "as_of": "2026-05-31",
+  "source_url": "https://amc.ppfas.com/downloads/portfolio-disclosure/2026/PPFAS_Monthly_Portfolio_Report_May_31_2026.xls?08062026_1",
+  "source_type": "excel",
+  "file_sha256": "4aa830be206c69e937fc40fb91e756776f1b3063fb3e72c25b4019471b4ab671",
+  "top10_total_pct": 51.38,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "INE040A01034",
+      "name": "HDFC Bank Ltd.",
+      "isin": "INE040A01034",
+      "sector": "Banks",
+      "weight_pct": 7.88
+    },
+    {
+      "rank": 2,
+      "key": "INE752E01010",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": "INE752E01010",
+      "sector": "Power",
+      "weight_pct": 6.41
+    },
+    {
+      "rank": 3,
+      "key": "INE154A01025",
+      "name": "ITC Ltd.",
+      "isin": "INE154A01025",
+      "sector": "Diversified FMCG",
+      "weight_pct": 5.84
+    },
+    {
+      "rank": 4,
+      "key": "INE522F01014",
+      "name": "Coal India Ltd.",
+      "isin": "INE522F01014",
+      "sector": "Consumable Fuels",
+      "weight_pct": 5.66
+    },
+    {
+      "rank": 5,
+      "key": "INE090A01021",
+      "name": "ICICI Bank Ltd.",
+      "isin": "INE090A01021",
+      "sector": "Banks",
+      "weight_pct": 5.11
+    },
+    {
+      "rank": 6,
+      "key": "US02079K3059",
+      "name": "Alphabet Inc.",
+      "isin": "US02079K3059",
+      "sector": "Computer Software: Programming, Data Processing",
+      "weight_pct": 4.83
+    },
+    {
+      "rank": 7,
+      "key": "INE118A01012",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": "INE118A01012",
+      "sector": "Finance",
+      "weight_pct": 4.48
+    },
+    {
+      "rank": 8,
+      "key": "INE237A01036",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "isin": "INE237A01036",
+      "sector": "Banks",
+      "weight_pct": 4.12
+    },
+    {
+      "rank": 9,
+      "key": "INE860A01027",
+      "name": "HCL Technologies Ltd.",
+      "isin": "INE860A01027",
+      "sector": "IT - Software",
+      "weight_pct": 3.6
+    },
+    {
+      "rank": 10,
+      "key": "INE101A01026",
+      "name": "Mahindra & Mahindra Ltd.",
+      "isin": "INE101A01026",
+      "sector": "Automobiles",
+      "weight_pct": 3.45
+    }
+  ]
+}
