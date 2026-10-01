@@ -1,19 +1,19 @@
 # STATE: Mutual Fund Top-10 Holdings Tracker
 
 ## Current State
-Milestone v1.1 (Fund Manager UI & Production Deployment) — **IN PLANNING** 🏗️
+Milestone v1.1 (Fund Manager UI & Production Deployment) — **PHASE 12 COMPLETE** ✅
 
 ## Next Action
-Run `/gsd-plan-phase 9` to start Phase 9 (Backfill CLI Enhancements).
+Run `/gsd-plan-phase 13` to plan Phase 13 (Vercel Production Deployment).
 
 ## Active Milestone: v1.1
 | Phase | Name | Status |
 |-------|------|--------|
-| 9 | Backfill CLI Enhancements | ⬜ Not started |
-| 10 | GitHub Actions: Backfill & Register-Fund Workflows | ⬜ Not started |
-| 11 | Fund Manager UI (Add / Edit / Remove Funds) | ⬜ Not started |
-| 12 | Backfill Period Picker UI | ⬜ Not started |
-| 13 | Vercel Production Deployment | ⬜ Not started |
+| 9 | Backfill CLI Enhancements | ✅ Completed (commit 51fd906) |
+| 10 | GitHub Actions: Backfill & Register-Fund Workflows | ✅ Completed (commit d4abdeb) |
+| 11 | Fund Manager UI (Add / Edit / Remove Funds) | ✅ Completed (commit 79fb307) |
+| 12 | Backfill Period Picker UI | ✅ Completed (commit 58d5725) |
+| 13 | Vercel Production Deployment | ⬜ Ready to plan |
 
 ## Decisions Log
 | # | Decision | Rationale | Date |
