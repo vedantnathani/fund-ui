@@ -1,0 +1,117 @@
+name: On-Demand Backfill
+
+# Triggered manually via the GitHub UI or the dashboard UI (Phase 12).
+# Runs pipeline/backfill.py for a specific fund + date range.
+on:
+  workflow_dispatch:
+    inputs:
+      fund_id:
+        description: 'Fund ID to backfill (or "all" for every enabled fund)'
+        required: false
+        type: string
+        default: 'all'
+      start_month:
+        description: 'Start month — YYYY-MM (inclusive)'
+        required: true
+        type: string
+      end_month:
+        description: 'End month — YYYY-MM (inclusive)'
+        required: true
+        type: string
+      dry_run:
+        description: 'Simulate without writing or committing any files'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    name: Backfill ${{ inputs.fund_id }} (${{ inputs.start_month }} → ${{ inputs.end_month }})
+    # Skip if triggered by a bot push (belt-and-suspenders guard)
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run test suite
+        run: |
+          pytest pipeline/tests/ -v
+
+      - name: Validate inputs
+        run: |
+          python -c "
+          import re, sys
+          pattern = re.compile(r'^\d{4}-(0[1-9]|1[0-2])$')
+          start = '${{ inputs.start_month }}'
+          end   = '${{ inputs.end_month }}'
+          if not pattern.match(start):
+              print(f'ERROR: start_month \"{start}\" is not a valid YYYY-MM.', file=sys.stderr)
+              sys.exit(1)
+          if not pattern.match(end):
+              print(f'ERROR: end_month \"{end}\" is not a valid YYYY-MM.', file=sys.stderr)
+              sys.exit(1)
+          if start > end:
+              print(f'ERROR: start_month \"{start}\" is after end_month \"{end}\".', file=sys.stderr)
+              sys.exit(1)
+          print(f'Inputs valid: {start} → {end} for fund \"{\"${{ inputs.fund_id }}\"}\"')
+          "
+
+      - name: Run backfill
+        id: backfill_step
+        run: |
+          ARGS="--fund-id ${{ inputs.fund_id }}"
+          ARGS="$ARGS --start ${{ inputs.start_month }}"
+          ARGS="$ARGS --end ${{ inputs.end_month }}"
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          echo "Running: python pipeline/backfill.py $ARGS"
+          python pipeline/backfill.py $ARGS
+
+      - name: Commit and push updated data
+        if: inputs.dry_run != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Only commit if there are actual changes
+          if git diff --quiet data/ && git ls-files --others --exclude-standard data/ | grep -q .; then
+            echo "No new data files to commit."
+          else
+            git add data/
+            if ! git diff --cached --quiet; then
+              git commit -m "chore(data): backfill ${{ inputs.fund_id }} ${{ inputs.start_month }}-${{ inputs.end_month }} [skip ci]"
+              git push origin main
+              echo "Data committed and pushed."
+            else
+              echo "No staged changes to commit."
+            fi
+          fi
+
+      - name: Summary
+        run: |
+          echo "### Backfill Complete ✅" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Fund | \`${{ inputs.fund_id }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Range | \`${{ inputs.start_month }}\` → \`${{ inputs.end_month }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Dry Run | \`${{ inputs.dry_run }}\` |" >> $GITHUB_STEP_SUMMARY

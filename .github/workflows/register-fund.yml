@@ -1,0 +1,156 @@
+name: Register New Fund
+
+# Triggered when config/funds.json is updated on main.
+# Detects newly added fund IDs, validates each, and runs an initial 12-month backfill.
+on:
+  push:
+    branches: [main]
+    paths: ['config/funds.json']
+
+permissions:
+  contents: write
+
+jobs:
+  register-fund:
+    runs-on: ubuntu-latest
+    name: Detect & backfill newly registered funds
+    # Don't run if this push was itself a bot data commit
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    steps:
+      - name: Checkout repository (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Detect newly added fund IDs
+        id: detect
+        run: |
+          python - << 'PYEOF'
+          import json, os, subprocess, sys
+
+          # Read current funds.json
+          with open("config/funds.json", "r", encoding="utf-8") as f:
+              curr_funds = json.load(f)
+
+          curr_ids = {
+              fund["id"]
+              for fund in curr_funds
+              if fund.get("enabled", True) and fund.get("type") == "equity"
+          }
+
+          # Read funds.json from the previous commit (HEAD~1)
+          try:
+              prev_raw = subprocess.check_output(
+                  ["git", "show", "HEAD~1:config/funds.json"],
+                  stderr=subprocess.DEVNULL,
+              )
+              prev_funds = json.loads(prev_raw)
+              prev_ids = {fund["id"] for fund in prev_funds}
+          except (subprocess.CalledProcessError, json.JSONDecodeError):
+              # First commit or previous file was invalid — treat all current as new
+              print("No valid previous funds.json found; treating all current funds as new.", file=sys.stderr)
+              prev_ids = set()
+
+          new_ids = curr_ids - prev_ids
+          new_ids_str = ",".join(sorted(new_ids))
+
+          print(f"Previous funds: {sorted(prev_ids)}")
+          print(f"Current funds:  {sorted(curr_ids)}")
+          print(f"Newly added:    {sorted(new_ids)}")
+
+          github_output = os.environ.get("GITHUB_OUTPUT", "")
+          if github_output:
+              with open(github_output, "a") as gh:
+                  gh.write(f"new_fund_ids={new_ids_str}\n")
+                  gh.write(f"has_new_funds={'true' if new_ids else 'false'}\n")
+          PYEOF
+
+      - name: Run test suite
+        run: |
+          pytest pipeline/tests/ -v
+
+      - name: Validate new fund configs
+        if: steps.detect.outputs.has_new_funds == 'true'
+        run: |
+          IFS=',' read -ra NEW_FUNDS <<< "${{ steps.detect.outputs.new_fund_ids }}"
+          EXIT_CODE=0
+          for fund_id in "${NEW_FUNDS[@]}"; do
+            echo "--- Validating: $fund_id ---"
+            if ! python pipeline/validate_fund_config.py --fund-id "$fund_id"; then
+              echo "Validation FAILED for: $fund_id"
+              EXIT_CODE=1
+            fi
+          done
+          exit $EXIT_CODE
+
+      - name: Backfill each new fund (last 12 months)
+        if: steps.detect.outputs.has_new_funds == 'true'
+        run: |
+          # Compute date range: 12 months ago → current month
+          START_MONTH=$(python -c "
+          from datetime import date
+          t = date.today()
+          m = t.month - 12
+          y = t.year
+          while m <= 0:
+              m += 12
+              y -= 1
+          print(f'{y:04d}-{m:02d}')
+          ")
+          END_MONTH=$(python -c "
+          from datetime import date
+          t = date.today()
+          print(f'{t.year:04d}-{t.month:02d}')
+          ")
+
+          echo "Backfill range: $START_MONTH → $END_MONTH"
+
+          IFS=',' read -ra NEW_FUNDS <<< "${{ steps.detect.outputs.new_fund_ids }}"
+          for fund_id in "${NEW_FUNDS[@]}"; do
+            echo "=== Backfilling: $fund_id ==="
+            python pipeline/backfill.py \
+              --fund-id "$fund_id" \
+              --start "$START_MONTH" \
+              --end "$END_MONTH" \
+              || echo "WARNING: backfill failed for $fund_id, continuing..."
+          done
+
+      - name: Commit and push updated data
+        if: steps.detect.outputs.has_new_funds == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if ! git diff --cached --quiet; then
+            FUNDS_LIST="${{ steps.detect.outputs.new_fund_ids }}"
+            git commit -m "chore(data): initial backfill for new fund(s): ${FUNDS_LIST} [skip ci]"
+            git push origin main
+            echo "Data committed and pushed."
+          else
+            echo "No new data to commit (all months may already exist)."
+          fi
+
+      - name: Summary
+        run: |
+          echo "### Fund Registration Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.detect.outputs.has_new_funds }}" = "true" ]; then
+            echo "**Newly registered funds:** \`${{ steps.detect.outputs.new_fund_ids }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "✅ Validation passed and 12-month backfill triggered." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ No newly enabled equity funds detected in this config update." >> $GITHUB_STEP_SUMMARY
+          fi
