@@ -24,8 +24,8 @@
 - `pipeline/tests/` — Unit tests for parser (Excel + PDF), validator, alias resolution
 - Passing tests against real fixture files
 
-### Phase 3: Diff Engine + Snapshots + Backfill
-**Status**: TODO
+### Phase 3: Diff Engine + Snapshots + Backfill ✅
+**Status**: DONE
 **Goal**: Generate month-over-month diffs and backfill 12 months of history.
 **Deliverables**:
 - `pipeline/diff.py` — Pure Python diff engine (entered/exited top 10, weight deltas, rank changes, significant flags)
