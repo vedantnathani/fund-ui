@@ -46,8 +46,8 @@
 - Clean exit when nothing new
 - Structured logging output
 
-### Phase 5: Dashboard
-**Status**: TODO
+### Phase 5: Dashboard ✅
+**Status**: DONE
 **Goal**: Build and deploy the premium Next.js dashboard on Vercel.
 **Deliverables**:
 - `web/` — Next.js app (App Router, TypeScript, Tailwind CSS, Recharts)

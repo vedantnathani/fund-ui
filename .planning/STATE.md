@@ -1,10 +1,10 @@
 # STATE: Mutual Fund Top-10 Holdings Tracker
 
 ## Current Phase
-Phase 5 (Dashboard) — **PLAN READY**
+Phase 5 (Dashboard) — **COMPLETED**
 
 ## Next Action
-Execute Phase 5 (Scaffold Next.js app in `web/`, build components, and verify static compilation)
+Begin Phase 6: LLM Summary (Pluggable providers, strict number verification, fallback)
 
 ## Decisions Log
 | # | Decision | Rationale | Date |
