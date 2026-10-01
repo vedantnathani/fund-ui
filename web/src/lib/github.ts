@@ -77,3 +77,45 @@ export async function disableFund(id: string): Promise<GithubApiResult> {
 export async function enableFund(id: string): Promise<GithubApiResult> {
   return callUpdateFund('enable', { id });
 }
+
+export interface BackfillParams {
+  fundId: string;
+  startMonth: string;
+  endMonth: string;
+  dryRun?: boolean;
+}
+
+export interface BackfillResult {
+  success: boolean;
+  runUrl?: string;
+  error?: string;
+}
+
+/** Dispatch on-demand backfill workflow via server-side Route Handler. */
+export async function triggerBackfill(params: BackfillParams): Promise<BackfillResult> {
+  try {
+    const res = await fetch('/api/github/dispatch-backfill', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fund_id: params.fundId,
+        start_month: params.startMonth,
+        end_month: params.endMonth,
+        dry_run: params.dryRun ?? false,
+      }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      return { success: false, error: data.error || `HTTP ${res.status}` };
+    }
+
+    return { success: true, runUrl: data.run_url };
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Network error occurred',
+    };
+  }
+}
+

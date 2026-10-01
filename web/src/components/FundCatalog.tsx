@@ -13,7 +13,10 @@ import {
   CheckCircle2,
   ArrowUpRight,
   Activity,
+  CloudDownload,
 } from 'lucide-react';
+import BackfillModal from './BackfillModal';
+import Toast, { ToastVariant } from './Toast';
 
 interface FundCatalogProps {
   funds: FundSummary[];
@@ -23,6 +26,37 @@ interface FundCatalogProps {
 export default function FundCatalog({ funds, lastUpdated }: FundCatalogProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedAmc, setSelectedAmc] = useState<string>('All');
+  const [backfillModalOpen, setBackfillModalOpen] = useState(false);
+  const [backfillFundId, setBackfillFundId] = useState('all');
+  const [toast, setToast] = useState<{
+    message: string;
+    variant: ToastVariant;
+    action?: { label: string; href: string };
+  } | null>(null);
+
+  const schemeOptions = useMemo(() => {
+    return funds.map((f) => ({ id: f.id, name: f.name, amc: f.amc }));
+  }, [funds]);
+
+  const handleOpenBackfill = (id = 'all') => {
+    setBackfillFundId(id);
+    setBackfillModalOpen(true);
+  };
+
+  const handleBackfillSuccess = (msg: string, runUrl?: string) => {
+    setToast({
+      message: msg,
+      variant: 'success',
+      action: runUrl ? { label: 'Track in GitHub Actions ↗', href: runUrl } : undefined,
+    });
+  };
+
+  const handleBackfillError = (err: string) => {
+    setToast({
+      message: err,
+      variant: 'error',
+    });
+  };
 
   const amcs = useMemo(() => {
     const list = Array.from(new Set(funds.map((f) => f.amc)));
@@ -89,34 +123,46 @@ export default function FundCatalog({ funds, lastUpdated }: FundCatalogProps) {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="relative w-full sm:w-96">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search by fund, AMC, or stock..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all"
-          />
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row items-center gap-3 flex-1">
+          <div className="relative w-full sm:w-80">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search by fund, AMC, or stock..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all"
+            />
+          </div>
+
+          {/* AMC Filter Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+            {amcs.map((amc) => (
+              <button
+                key={amc}
+                onClick={() => setSelectedAmc(amc)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+                  selectedAmc === amc
+                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
+                    : 'bg-white/[0.03] text-gray-400 hover:text-white hover:bg-white/[0.06] border border-white/5'
+                }`}
+              >
+                {amc}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* AMC Filter Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-          {amcs.map((amc) => (
-            <button
-              key={amc}
-              onClick={() => setSelectedAmc(amc)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
-                selectedAmc === amc
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
-                  : 'bg-white/[0.03] text-gray-400 hover:text-white hover:bg-white/[0.06] border border-white/5'
-              }`}
-            >
-              {amc}
-            </button>
-          ))}
-        </div>
+        {/* Global Backfill Action */}
+        <button
+          type="button"
+          onClick={() => handleOpenBackfill('all')}
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-white/[0.05] hover:bg-white/[0.09] text-white border border-white/10 hover:border-indigo-500/30 transition-all shadow-sm shrink-0"
+        >
+          <CloudDownload className="w-4 h-4 text-indigo-400" />
+          Fetch Historical Data
+        </button>
       </div>
 
       {/* Fund Cards Grid */}
@@ -199,21 +245,60 @@ export default function FundCatalog({ funds, lastUpdated }: FundCatalogProps) {
                 </div>
 
                 {/* Card Action footer */}
-                <div className="pt-6 mt-6 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-xs text-gray-500">
-                    {fund.months_available.length} Reports Ingested
-                  </span>
+                <div className="pt-5 mt-6 border-t border-white/5 flex items-center justify-between gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleOpenBackfill(fund.id)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-gray-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/5 hover:border-indigo-500/30 transition-all"
+                    title={`Fetch past portfolio disclosures for ${fund.name}`}
+                  >
+                    <CloudDownload className="w-3.5 h-3.5 text-indigo-400" />
+                    Fetch Data
+                  </button>
                   <Link
                     href={`/fund/${fund.id}`}
                     className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-400 hover:text-indigo-300 group-hover:translate-x-0.5 transition-all"
                   >
-                    View Holdings & Diff
+                    View Holdings
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* Backfill Modal */}
+      <BackfillModal
+        isOpen={backfillModalOpen}
+        onClose={() => setBackfillModalOpen(false)}
+        funds={schemeOptions}
+        initialFundId={backfillFundId}
+        onSuccess={handleBackfillSuccess}
+        onError={handleBackfillError}
+      />
+
+      {/* Toast Notification */}
+      {toast && (
+        <div className="fixed bottom-5 right-5 z-50 animate-in slide-in-from-bottom-5 duration-200">
+          <Toast
+            message={toast.message}
+            variant={toast.variant}
+            onClose={() => setToast(null)}
+          />
+          {toast.action && (
+            <div className="mt-2 text-right">
+              <a
+                href={toast.action.href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-medium text-indigo-400 hover:text-indigo-300 underline"
+              >
+                {toast.action.label}
+              </a>
+            </div>
+          )}
         </div>
       )}
     </div>

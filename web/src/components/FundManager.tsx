@@ -4,11 +4,12 @@ import { useState, useCallback, useEffect } from 'react';
 import {
   Plus, Settings2, CheckCircle2, XCircle, Building2,
   ExternalLink, ToggleLeft, ToggleRight, Loader2,
-  Lock, Unlock, Eye
+  Lock, Unlock, Eye, CloudDownload
 } from 'lucide-react';
 import { FundConfig } from '@/types';
 import { addFund, disableFund, enableFund, verifyAdminPasscode } from '@/lib/github';
 import Toast, { ToastVariant } from './Toast';
+import BackfillModal from './BackfillModal';
 
 interface FundManagerProps {
   initialFunds: FundConfig[];
@@ -119,10 +120,12 @@ function FundRow({
   fund,
   onToggle,
   toggling,
+  onBackfill,
 }: {
   fund: FundConfig;
   onToggle: (id: string, enable: boolean) => void;
   toggling: string | null;
+  onBackfill: (id: string) => void;
 }) {
   const isToggling = toggling === fund.id;
   return (
@@ -160,24 +163,37 @@ function FundRow({
           </a>
         </div>
       </div>
-      <button
-        onClick={() => onToggle(fund.id, !fund.enabled)}
-        disabled={isToggling}
-        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all border ${
-          fund.enabled
-            ? 'border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20'
-            : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20'
-        } disabled:opacity-50`}
-      >
-        {isToggling ? (
-          <Loader2 className="w-3.5 h-3.5 animate-spin" />
-        ) : fund.enabled ? (
-          <ToggleLeft className="w-4 h-4" />
-        ) : (
-          <ToggleRight className="w-4 h-4" />
-        )}
-        {fund.enabled ? 'Disable' : 'Enable'}
-      </button>
+
+      <div className="flex items-center gap-2 shrink-0">
+        <button
+          type="button"
+          onClick={() => onBackfill(fund.id)}
+          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-indigo-300 hover:text-white bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 transition-all"
+          title={`Fetch past portfolio disclosures for ${fund.name}`}
+        >
+          <CloudDownload className="w-3.5 h-3.5" />
+          Fetch Data
+        </button>
+
+        <button
+          onClick={() => onToggle(fund.id, !fund.enabled)}
+          disabled={isToggling}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all border ${
+            fund.enabled
+              ? 'border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20'
+              : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20'
+          } disabled:opacity-50`}
+        >
+          {isToggling ? (
+            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+          ) : fund.enabled ? (
+            <ToggleLeft className="w-4 h-4" />
+          ) : (
+            <ToggleRight className="w-4 h-4" />
+          )}
+          {fund.enabled ? 'Disable' : 'Enable'}
+        </button>
+      </div>
     </div>
   );
 }
@@ -448,6 +464,8 @@ export default function FundManager({ initialFunds }: FundManagerProps) {
   const [toast, setToast] = useState<{ message: string; variant: ToastVariant } | null>(null);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
+  const [backfillModalOpen, setBackfillModalOpen] = useState(false);
+  const [backfillFundId, setBackfillFundId] = useState('all');
 
   useEffect(() => {
     const saved = typeof window !== 'undefined' ? sessionStorage.getItem('admin_passcode') : null;
@@ -467,6 +485,15 @@ export default function FundManager({ initialFunds }: FundManagerProps) {
   const showToast = useCallback((message: string, variant: ToastVariant) => {
     setToast({ message, variant });
   }, []);
+
+  const handleOpenBackfill = (id: string) => {
+    setBackfillFundId(id);
+    setBackfillModalOpen(true);
+  };
+
+  const handleBackfillSuccess = (msg: string) => {
+    showToast(msg, 'success');
+  };
 
   const handleToggle = async (id: string, enable: boolean) => {
     setToggling(id);
@@ -547,7 +574,13 @@ export default function FundManager({ initialFunds }: FundManagerProps) {
         ) : (
           <div className="space-y-3">
             {activeFunds.map((fund) => (
-              <FundRow key={fund.id} fund={fund} onToggle={handleToggle} toggling={toggling} />
+              <FundRow
+                key={fund.id}
+                fund={fund}
+                onToggle={handleToggle}
+                toggling={toggling}
+                onBackfill={handleOpenBackfill}
+              />
             ))}
           </div>
         )}
@@ -561,11 +594,27 @@ export default function FundManager({ initialFunds }: FundManagerProps) {
           </h2>
           <div className="space-y-3">
             {disabledFunds.map((fund) => (
-              <FundRow key={fund.id} fund={fund} onToggle={handleToggle} toggling={toggling} />
+              <FundRow
+                key={fund.id}
+                fund={fund}
+                onToggle={handleToggle}
+                toggling={toggling}
+                onBackfill={handleOpenBackfill}
+              />
             ))}
           </div>
         </section>
       )}
+
+      {/* Backfill Modal */}
+      <BackfillModal
+        isOpen={backfillModalOpen}
+        onClose={() => setBackfillModalOpen(false)}
+        funds={funds.map((f) => ({ id: f.id, name: f.name, amc: f.amc }))}
+        initialFundId={backfillFundId}
+        onSuccess={handleBackfillSuccess}
+        onError={(err) => showToast(err, 'error')}
+      />
 
       {/* Add Fund Modal */}
       {showAddModal && (
