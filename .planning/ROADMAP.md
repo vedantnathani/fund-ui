@@ -36,8 +36,8 @@
 - Unit tests for diff engine (including no-changes month)
 - `--dry-run` flag support
 
-### Phase 4: GitHub Actions Workflow
-**Status**: TODO
+### Phase 4: GitHub Actions Workflow ✅
+**Status**: DONE
 **Goal**: Automate the pipeline with scheduled GitHub Actions.
 **Deliverables**:
 - `.github/workflows/pipeline.yml` — Scheduled cron (2x daily during days 3-20), manual dispatch
