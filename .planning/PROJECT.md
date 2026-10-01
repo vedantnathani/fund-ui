@@ -3,8 +3,11 @@
 ## Vision
 A system that monitors mutual fund monthly factsheets, extracts each fund's TOP 10 equity holdings, compares them with the previous month, and shows everything on a premium dashboard. Starts with PPFAS Mutual Fund and scales to many funds/AMCs via a config file.
 
-## Problem Statement
-Indian mutual fund factsheets are published monthly as PDFs/Excel files on AMC websites. Investors who want to track changes in a fund's top holdings must manually download, read, and compare these documents month over month. This project automates the entire pipeline: scrape → parse → validate → diff → summarize → display.
+## Current State
+- **Shipped Version**: v1.0 (2026-10-02) ✅
+- **Active Milestone**: v1.1 — Fund Manager UI & Production Deployment (in planning)
+- **Status**: v1.0 production-ready. v1.1 adds self-service fund management from the UI, parameterized backfill by period, and full Vercel deployment.
+- **Milestone Archive**: [`.planning/milestones/v1.0-ROADMAP.md`](milestones/v1.0-ROADMAP.md) | [`.planning/v1.0-MILESTONE-AUDIT.md`](v1.0-MILESTONE-AUDIT.md)
 
 ## Architecture
 
