@@ -8,9 +8,12 @@
     "source_page": "https://amc.ppfas.com/downloads/factsheet/",
     "excel_sheet": "PPFCF",
     "pdf_section_keyword": "Parag Parikh Flexi Cap Fund",
-    "parser_preference": ["excel", "pdf_text"],
+    "parser_preference": [
+      "excel",
+      "pdf_text"
+    ],
     "significant_change_pp": 0.5,
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "ppfas-taxsaver",
@@ -21,7 +24,10 @@
     "source_page": "https://amc.ppfas.com/downloads/factsheet/",
     "excel_sheet": "PPTSF",
     "pdf_section_keyword": "Tax Saver",
-    "parser_preference": ["excel", "pdf_text"],
+    "parser_preference": [
+      "excel",
+      "pdf_text"
+    ],
     "significant_change_pp": 0.5,
     "enabled": true
   }
