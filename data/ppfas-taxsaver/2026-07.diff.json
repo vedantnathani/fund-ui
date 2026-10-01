@@ -1,0 +1,181 @@
+{
+  "fund_id": "ppfas-taxsaver",
+  "current_month": "2026-07",
+  "previous_month": "2026-06",
+  "as_of": "2026-07-31",
+  "prev_as_of": "2026-06-30",
+  "top10_total_pct": 55.66,
+  "prev_top10_total_pct": 56.02,
+  "top10_total_delta_pp": -0.36,
+  "entered_top10": [
+    {
+      "key": "hcl-technologies-ltd",
+      "name": "HCL Technologies Ltd.",
+      "isin": null,
+      "sector": "IT - Software",
+      "rank": 8,
+      "weight_pct": 4.53
+    }
+  ],
+  "exited_top10": [
+    {
+      "key": "axis-bank-ltd",
+      "name": "Axis Bank Ltd.",
+      "isin": null,
+      "sector": "Banks",
+      "prev_rank": 10,
+      "prev_weight_pct": 3.84
+    }
+  ],
+  "retained": [
+    {
+      "key": "hdfc-bank-ltd",
+      "name": "HDFC Bank Ltd.",
+      "isin": null,
+      "sector": "Banks",
+      "rank": 1,
+      "prev_rank": 1,
+      "rank_change": 0,
+      "weight_pct": 7.58,
+      "prev_weight_pct": 8.23,
+      "weight_delta_pp": -0.65,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "bajaj-holdings-investment-ltd",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": null,
+      "sector": "Finance",
+      "rank": 2,
+      "prev_rank": 3,
+      "rank_change": 1,
+      "weight_pct": 7.02,
+      "prev_weight_pct": 6.68,
+      "weight_delta_pp": 0.34,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "power-grid-corp-of-india-ltd",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": null,
+      "sector": "Power",
+      "rank": 3,
+      "prev_rank": 2,
+      "rank_change": -1,
+      "weight_pct": 6.81,
+      "prev_weight_pct": 6.98,
+      "weight_delta_pp": -0.17,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "coal-india-ltd",
+      "name": "Coal India Ltd.",
+      "isin": null,
+      "sector": "Consumable Fuels",
+      "rank": 4,
+      "prev_rank": 4,
+      "rank_change": 0,
+      "weight_pct": 5.97,
+      "prev_weight_pct": 6.44,
+      "weight_delta_pp": -0.47,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "maharashtra-scooters-ltd",
+      "name": "Maharashtra Scooters Ltd.",
+      "isin": null,
+      "sector": "Finance",
+      "rank": 5,
+      "prev_rank": 6,
+      "rank_change": 1,
+      "weight_pct": 5.39,
+      "prev_weight_pct": 5.28,
+      "weight_delta_pp": 0.11,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "icici-bank-ltd",
+      "name": "ICICI Bank Ltd.",
+      "isin": null,
+      "sector": "Banks",
+      "rank": 6,
+      "prev_rank": 7,
+      "rank_change": 1,
+      "weight_pct": 5.13,
+      "prev_weight_pct": 5.0,
+      "weight_delta_pp": 0.13,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "itc-ltd",
+      "name": "ITC Ltd.",
+      "isin": null,
+      "sector": "Diversified FMCG",
+      "rank": 7,
+      "prev_rank": 5,
+      "rank_change": -2,
+      "weight_pct": 5.09,
+      "prev_weight_pct": 5.29,
+      "weight_delta_pp": -0.2,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "kotak-mahindra-bank-ltd",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "isin": null,
+      "sector": "Banks",
+      "rank": 9,
+      "prev_rank": 8,
+      "rank_change": -1,
+      "weight_pct": 4.17,
+      "prev_weight_pct": 4.27,
+      "weight_delta_pp": -0.1,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "maruti-suzuki-india-ltd",
+      "name": "Maruti Suzuki India Ltd.",
+      "isin": null,
+      "sector": "Automobiles",
+      "rank": 10,
+      "prev_rank": 9,
+      "rank_change": -1,
+      "weight_pct": 3.97,
+      "prev_weight_pct": 4.01,
+      "weight_delta_pp": -0.04,
+      "direction": "decreased",
+      "significant": false
+    }
+  ],
+  "summary": {
+    "num_entered": 1,
+    "num_exited": 1,
+    "num_increased": 3,
+    "num_decreased": 6,
+    "num_unchanged": 0,
+    "num_significant": 1,
+    "biggest_increase": {
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "weight_delta_pp": 0.34
+    },
+    "biggest_decrease": {
+      "name": "HDFC Bank Ltd.",
+      "weight_delta_pp": -0.65
+    }
+  },
+  "amc_commentary": null,
+  "ai_summary": {
+    "text": "In 2026-07, Parag Parikh ELSS Tax Saver Fund saw 1 holdings enter the top 10 (HCL Technologies Ltd.), while Axis Bank Ltd. exited. Total top-10 concentration decreased by 0.36pp from 56.02% to 55.66%. Bajaj Holdings & Investment Ltd. recorded the largest weight expansion (+0.34pp), while HDFC Bank Ltd. saw the largest reduction (-0.65pp). HDFC Bank Ltd. remained the portfolio's largest single position at 7.58%.",
+    "provider": "template_fallback",
+    "verified": true,
+    "generated_at": "2026-10-01T20:04:32.674520+00:00"
+  }
+}

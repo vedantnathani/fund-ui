@@ -104,6 +104,7 @@ class ParserOrchestrator:
 
         return {
             "fund_id": fund_id,
+            "fund_name": fund.get("name", fund_id),
             "as_of": as_of,
             "source_url": source_url or "",
             "source_type": source_type,

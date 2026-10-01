@@ -4,9 +4,23 @@
     "name": "Parag Parikh Flexi Cap Fund",
     "amc": "PPFAS Mutual Fund",
     "type": "equity",
+    "category": "Flexi Cap",
     "source_page": "https://amc.ppfas.com/downloads/factsheet/",
     "excel_sheet": "PPFCF",
     "pdf_section_keyword": "Parag Parikh Flexi Cap Fund",
+    "parser_preference": ["excel", "pdf_text"],
+    "significant_change_pp": 0.5,
+    "enabled": true
+  },
+  {
+    "id": "ppfas-taxsaver",
+    "name": "Parag Parikh ELSS Tax Saver Fund",
+    "amc": "PPFAS Mutual Fund",
+    "type": "equity",
+    "category": "ELSS / Tax Saver",
+    "source_page": "https://amc.ppfas.com/downloads/factsheet/",
+    "excel_sheet": "PPTSF",
+    "pdf_section_keyword": "Tax Saver",
     "parser_preference": ["excel", "pdf_text"],
     "significant_change_pp": 0.5,
     "enabled": true

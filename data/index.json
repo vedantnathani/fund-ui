@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-01T19:51:58.915002+00:00",
-  "total_funds": 1,
+  "last_updated": "2026-10-01T20:04:32.676091+00:00",
+  "total_funds": 2,
   "funds": [
     {
       "id": "ppfas-flexicap",
       "name": "Parag Parikh Flexi Cap Fund",
       "amc": "PPFAS Mutual Fund",
-      "category": "Equity Fund",
+      "category": "Flexi Cap",
       "type": "equity",
       "latest_month": "2026-08",
       "latest_as_of": "2026-08-31",
@@ -35,6 +35,42 @@
         "biggest_decrease": {
           "name": "ITC Ltd.",
           "weight_delta_pp": -0.48
+        }
+      }
+    },
+    {
+      "id": "ppfas-taxsaver",
+      "name": "Parag Parikh ELSS Tax Saver Fund",
+      "amc": "PPFAS Mutual Fund",
+      "category": "ELSS / Tax Saver",
+      "type": "equity",
+      "latest_month": "2026-08",
+      "latest_as_of": "2026-08-31",
+      "top10_total_pct": 55.37,
+      "top_holding": {
+        "name": "Bajaj Holdings & Investment Ltd.",
+        "weight_pct": 7.32
+      },
+      "months_available": [
+        "2026-08",
+        "2026-07",
+        "2026-06"
+      ],
+      "latest_changes_count": 0,
+      "latest_diff_summary": {
+        "num_entered": 0,
+        "num_exited": 0,
+        "num_increased": 4,
+        "num_decreased": 6,
+        "num_unchanged": 0,
+        "num_significant": 0,
+        "biggest_increase": {
+          "name": "Kotak Mahindra Bank Ltd.",
+          "weight_delta_pp": 0.38
+        },
+        "biggest_decrease": {
+          "name": "Power Grid Corp of India Ltd.",
+          "weight_delta_pp": -0.4
         }
       }
     }

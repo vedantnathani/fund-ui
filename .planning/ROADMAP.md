@@ -68,13 +68,14 @@
 - Summary stored in diff JSON, displayed on dashboard with "AI-generated" label
 - Integration tests (32/32 tests passing)
 
-### Phase 7: Scalability Proof — Second Fund
-**Status**: TODO
+### Phase 7: Scalability Proof — Second Fund ✅
+**Status**: DONE
 **Goal**: Add a second fund via config only to prove the system scales.
 **Deliverables**:
-- New entry in `config/funds.json` for a second equity fund
+- New entry in `config/funds.json` for a second equity fund (`ppfas-taxsaver`)
 - Pipeline processes both funds without code changes
-- Dashboard displays both funds
+- Dashboard displays both funds with static routing
+- Multi-fund integration tests (37/37 tests passing)
 - Documentation of the process
 
 ## Milestone 2: Polish & Documentation (v1.0)

@@ -192,7 +192,19 @@ class DiffEngine:
             try:
                 from pipeline.summarize import Summarizer
                 summarizer = Summarizer()
-                fund_name = current_snapshot.get("fund_name") or previous_snapshot.get("fund_name") or "Parag Parikh Flexi Cap Fund"
+                fund_name = current_snapshot.get("fund_name") or previous_snapshot.get("fund_name")
+                if not fund_name and fund_id:
+                    try:
+                        with open("config/funds.json", "r", encoding="utf-8") as f:
+                            cfg = json.load(f)
+                            for item in cfg:
+                                if item.get("id") == fund_id:
+                                    fund_name = item.get("name")
+                                    break
+                    except Exception:
+                        pass
+                if not fund_name:
+                    fund_name = "Parag Parikh Flexi Cap Fund"
                 diff_result["ai_summary"] = summarizer.generate(diff_result, fund_name=fund_name)
             except Exception as e:
                 logger.warning(f"Failed to generate AI summary for diff: {e}")

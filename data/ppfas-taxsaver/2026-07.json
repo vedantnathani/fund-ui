@@ -1,0 +1,92 @@
+{
+  "fund_id": "ppfas-taxsaver",
+  "fund_name": "Parag Parikh ELSS Tax Saver Fund",
+  "as_of": "2026-07-31",
+  "source_url": "",
+  "source_type": "pdf_text",
+  "file_sha256": "0fa885c48d25c0876c13d3a70ada62b0146db9f95219a18944e0e3a0d46217ef",
+  "top10_total_pct": 55.66,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "hdfc-bank-ltd",
+      "name": "HDFC Bank Ltd.",
+      "isin": null,
+      "sector": "Banks",
+      "weight_pct": 7.58
+    },
+    {
+      "rank": 2,
+      "key": "bajaj-holdings-investment-ltd",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": null,
+      "sector": "Finance",
+      "weight_pct": 7.02
+    },
+    {
+      "rank": 3,
+      "key": "power-grid-corp-of-india-ltd",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": null,
+      "sector": "Power",
+      "weight_pct": 6.81
+    },
+    {
+      "rank": 4,
+      "key": "coal-india-ltd",
+      "name": "Coal India Ltd.",
+      "isin": null,
+      "sector": "Consumable Fuels",
+      "weight_pct": 5.97
+    },
+    {
+      "rank": 5,
+      "key": "maharashtra-scooters-ltd",
+      "name": "Maharashtra Scooters Ltd.",
+      "isin": null,
+      "sector": "Finance",
+      "weight_pct": 5.39
+    },
+    {
+      "rank": 6,
+      "key": "icici-bank-ltd",
+      "name": "ICICI Bank Ltd.",
+      "isin": null,
+      "sector": "Banks",
+      "weight_pct": 5.13
+    },
+    {
+      "rank": 7,
+      "key": "itc-ltd",
+      "name": "ITC Ltd.",
+      "isin": null,
+      "sector": "Diversified FMCG",
+      "weight_pct": 5.09
+    },
+    {
+      "rank": 8,
+      "key": "hcl-technologies-ltd",
+      "name": "HCL Technologies Ltd.",
+      "isin": null,
+      "sector": "IT - Software",
+      "weight_pct": 4.53
+    },
+    {
+      "rank": 9,
+      "key": "kotak-mahindra-bank-ltd",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "isin": null,
+      "sector": "Banks",
+      "weight_pct": 4.17
+    },
+    {
+      "rank": 10,
+      "key": "maruti-suzuki-india-ltd",
+      "name": "Maruti Suzuki India Ltd.",
+      "isin": null,
+      "sector": "Automobiles",
+      "weight_pct": 3.97
+    }
+  ]
+}

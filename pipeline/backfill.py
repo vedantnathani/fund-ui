@@ -27,24 +27,30 @@ logger = logging.getLogger(__name__)
 
 
 def run_fixtures_backfill(
-    fund_id: str = "ppfas-flexicap",
+    fund_id: str = "all",
     fixtures_dir: str = "pipeline/tests/fixtures/ppfas-flexicap",
     data_dir: str = "data",
     dry_run: bool = False,
+    config_path: str = "config/funds.json",
 ) -> None:
     """
     Backfill using local fixture files (June, July, August 2026).
+    Supports backfilling a single fund or all enabled funds.
     """
-    logger.info(f"Running fixtures backfill for fund '{fund_id}' from {fixtures_dir}")
-    orchestrator = ParserOrchestrator()
+    with open(config_path, "r", encoding="utf-8") as f:
+        funds = json.load(f)
+
+    if fund_id and fund_id != "all":
+        target_funds = [f for f in funds if f.get("id") == fund_id]
+        if not target_funds:
+            raise ValueError(f"No fund matched fund_id '{fund_id}'")
+    else:
+        target_funds = [f for f in funds if f.get("enabled", True)]
+
+    orchestrator = ParserOrchestrator(config_path=config_path)
     diff_engine = DiffEngine(significant_threshold_pp=0.5)
-
     fix_path = Path(fixtures_dir)
-    target_data_dir = Path(data_dir) / fund_id
-    if not dry_run:
-        target_data_dir.mkdir(parents=True, exist_ok=True)
 
-    # Process files in chronological order
     months_plan = [
         {"month": "2026-06", "pdf": fix_path / "factsheet-2026-06.pdf", "excel": None},
         {"month": "2026-07", "pdf": fix_path / "factsheet-2026-07.pdf", "excel": None},
@@ -55,40 +61,51 @@ def run_fixtures_backfill(
         },
     ]
 
-    snapshots: Dict[str, Dict[str, Any]] = {}
-
-    for item in months_plan:
-        m = item["month"]
-        logger.info(f"Processing month {m}...")
-        snap = orchestrator.parse_with_fallback(
-            fund_id=fund_id,
-            excel_path=item["excel"],
-            pdf_path=item["pdf"],
-        )
-        snapshots[m] = snap
-
+    for fund in target_funds:
+        fid = fund["id"]
+        logger.info(f"Running fixtures backfill for fund '{fid}' ({fund.get('name')})")
+        target_data_dir = Path(data_dir) / fid
         if not dry_run:
-            snap_file = target_data_dir / f"{m}.json"
-            with open(snap_file, "w", encoding="utf-8") as f:
-                json.dump(snap, f, indent=2)
-            logger.info(f"Saved snapshot: {snap_file}")
+            target_data_dir.mkdir(parents=True, exist_ok=True)
 
-    # Compute diffs between consecutive months
-    sorted_months = sorted(snapshots.keys())
-    for i in range(1, len(sorted_months)):
-        curr_m = sorted_months[i]
-        prev_m = sorted_months[i - 1]
-        logger.info(f"Computing diff: {curr_m} vs {prev_m}...")
-        diff = diff_engine.compute_diff(snapshots[curr_m], snapshots[prev_m])
+        snapshots: Dict[str, Dict[str, Any]] = {}
 
-        if not dry_run:
-            diff_file = target_data_dir / f"{curr_m}.diff.json"
-            with open(diff_file, "w", encoding="utf-8") as f:
-                json.dump(diff, f, indent=2)
-            logger.info(f"Saved diff: {diff_file}")
+        for item in months_plan:
+            m = item["month"]
+            logger.info(f"Processing month {m} for {fid}...")
+            snap = orchestrator.parse_with_fallback(
+                fund_id=fid,
+                excel_path=item["excel"],
+                pdf_path=item["pdf"],
+            )
+            snapshots[m] = snap
+
+            if not dry_run:
+                snap_file = target_data_dir / f"{m}.json"
+                with open(snap_file, "w", encoding="utf-8") as f:
+                    json.dump(snap, f, indent=2)
+                logger.info(f"Saved snapshot: {snap_file}")
+
+        # Compute diffs between consecutive months
+        sorted_months = sorted(snapshots.keys())
+        for i in range(1, len(sorted_months)):
+            curr_m = sorted_months[i]
+            prev_m = sorted_months[i - 1]
+            logger.info(f"Computing diff for {fid}: {curr_m} vs {prev_m}...")
+            diff = diff_engine.compute_diff(
+                snapshots[curr_m],
+                snapshots[prev_m],
+                significant_change_pp=fund.get("significant_change_pp", 0.5),
+            )
+
+            if not dry_run:
+                diff_file = target_data_dir / f"{curr_m}.diff.json"
+                with open(diff_file, "w", encoding="utf-8") as f:
+                    json.dump(diff, f, indent=2)
+                logger.info(f"Saved diff: {diff_file}")
 
     if not dry_run:
-        build_index(data_dir=data_dir, out_path=f"{data_dir}/index.json")
+        build_index(data_dir=data_dir, config_path=config_path, out_path=f"{data_dir}/index.json")
 
 
 def run_online_backfill(
@@ -173,7 +190,7 @@ def run_online_backfill(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Backfill mutual fund snapshots and diffs")
-    parser.add_argument("--fund-id", default="ppfas-flexicap", help="Target fund ID")
+    parser.add_argument("--fund-id", default="all", help="Target fund ID (or 'all')")
     parser.add_argument("--months", type=int, default=12, help="Number of months to backfill")
     parser.add_argument("--fixtures-only", action="store_true", help="Use local test fixtures only")
     parser.add_argument("--dry-run", action="store_true", help="Simulate without writing files")

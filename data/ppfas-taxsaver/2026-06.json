@@ -1,11 +1,11 @@
 {
-  "fund_id": "ppfas-flexicap",
-  "fund_name": "Parag Parikh Flexi Cap Fund",
+  "fund_id": "ppfas-taxsaver",
+  "fund_name": "Parag Parikh ELSS Tax Saver Fund",
   "as_of": "2026-06-30",
   "source_url": "",
   "source_type": "pdf_text",
   "file_sha256": "76de0723d600026330e9d0c7616ddcfd2775d081cbc7393aace66cf75dbdcaf1",
-  "top10_total_pct": 51.82,
+  "top10_total_pct": 56.02,
   "amc_commentary": null,
   "holdings": [
     {
@@ -14,7 +14,7 @@
       "name": "HDFC Bank Ltd.",
       "isin": null,
       "sector": "Banks",
-      "weight_pct": 8.33
+      "weight_pct": 8.23
     },
     {
       "rank": 2,
@@ -22,47 +22,47 @@
       "name": "Power Grid Corp of India Ltd.",
       "isin": null,
       "sector": "Power",
-      "weight_pct": 6.23
+      "weight_pct": 6.98
     },
     {
       "rank": 3,
-      "key": "itc-ltd",
-      "name": "ITC Ltd.",
-      "isin": null,
-      "sector": "Diversified FMCG",
-      "weight_pct": 6.07
-    },
-    {
-      "rank": 4,
-      "key": "icici-bank-ltd",
-      "name": "ICICI Bank Ltd.",
-      "isin": null,
-      "sector": "Banks",
-      "weight_pct": 5.52
-    },
-    {
-      "rank": 5,
-      "key": "coal-india-ltd",
-      "name": "Coal India Ltd.",
-      "isin": null,
-      "sector": "Consumable Fuels",
-      "weight_pct": 5.35
-    },
-    {
-      "rank": 6,
       "key": "bajaj-holdings-investment-ltd",
       "name": "Bajaj Holdings & Investment Ltd.",
       "isin": null,
       "sector": "Finance",
-      "weight_pct": 4.63
+      "weight_pct": 6.68
+    },
+    {
+      "rank": 4,
+      "key": "coal-india-ltd",
+      "name": "Coal India Ltd.",
+      "isin": null,
+      "sector": "Consumable Fuels",
+      "weight_pct": 6.44
+    },
+    {
+      "rank": 5,
+      "key": "itc-ltd",
+      "name": "ITC Ltd.",
+      "isin": null,
+      "sector": "Diversified FMCG",
+      "weight_pct": 5.29
+    },
+    {
+      "rank": 6,
+      "key": "maharashtra-scooters-ltd",
+      "name": "Maharashtra Scooters Ltd.",
+      "isin": null,
+      "sector": "Finance",
+      "weight_pct": 5.28
     },
     {
       "rank": 7,
-      "key": "alphabet-inc",
-      "name": "Alphabet Inc.",
+      "key": "icici-bank-ltd",
+      "name": "ICICI Bank Ltd.",
       "isin": null,
-      "sector": "Computer Software",
-      "weight_pct": 4.46
+      "sector": "Banks",
+      "weight_pct": 5.0
     },
     {
       "rank": 8,
@@ -70,23 +70,23 @@
       "name": "Kotak Mahindra Bank Ltd.",
       "isin": null,
       "sector": "Banks",
-      "weight_pct": 4.23
+      "weight_pct": 4.27
     },
     {
       "rank": 9,
-      "key": "mahindra-mahindra-ltd",
-      "name": "Mahindra & Mahindra Ltd.",
+      "key": "maruti-suzuki-india-ltd",
+      "name": "Maruti Suzuki India Ltd.",
       "isin": null,
       "sector": "Automobiles",
-      "weight_pct": 3.56
+      "weight_pct": 4.01
     },
     {
       "rank": 10,
-      "key": "hcl-technologies-ltd",
-      "name": "HCL Technologies Ltd.",
+      "key": "axis-bank-ltd",
+      "name": "Axis Bank Ltd.",
       "isin": null,
-      "sector": "IT - Software",
-      "weight_pct": 3.44
+      "sector": "Banks",
+      "weight_pct": 3.84
     }
   ]
 }

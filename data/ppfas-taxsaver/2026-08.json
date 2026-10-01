@@ -1,0 +1,92 @@
+{
+  "fund_id": "ppfas-taxsaver",
+  "fund_name": "Parag Parikh ELSS Tax Saver Fund",
+  "as_of": "2026-08-31",
+  "source_url": "",
+  "source_type": "excel",
+  "file_sha256": "3db5e8b12328fa207bef7912a39169a39dfecb6bbef4c2f1d2e819cae5357305",
+  "top10_total_pct": 55.37,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "INE118A01012",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": "INE118A01012",
+      "sector": "Finance",
+      "weight_pct": 7.32
+    },
+    {
+      "rank": 2,
+      "key": "INE040A01034",
+      "name": "HDFC Bank Ltd.",
+      "isin": "INE040A01034",
+      "sector": "Banks",
+      "weight_pct": 7.29
+    },
+    {
+      "rank": 3,
+      "key": "INE752E01010",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": "INE752E01010",
+      "sector": "Power",
+      "weight_pct": 6.41
+    },
+    {
+      "rank": 4,
+      "key": "INE522F01014",
+      "name": "Coal India Ltd.",
+      "isin": "INE522F01014",
+      "sector": "Consumable Fuels",
+      "weight_pct": 5.88
+    },
+    {
+      "rank": 5,
+      "key": "INE288A01013",
+      "name": "Maharashtra Scooters Ltd.",
+      "isin": "INE288A01013",
+      "sector": "Finance",
+      "weight_pct": 5.76
+    },
+    {
+      "rank": 6,
+      "key": "INE090A01021",
+      "name": "ICICI Bank Ltd.",
+      "isin": "INE090A01021",
+      "sector": "Banks",
+      "weight_pct": 5.14
+    },
+    {
+      "rank": 7,
+      "key": "INE154A01025",
+      "name": "ITC Ltd.",
+      "isin": "INE154A01025",
+      "sector": "Diversified FMCG",
+      "weight_pct": 4.7
+    },
+    {
+      "rank": 8,
+      "key": "INE237A01036",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "isin": "INE237A01036",
+      "sector": "Banks",
+      "weight_pct": 4.55
+    },
+    {
+      "rank": 9,
+      "key": "INE860A01027",
+      "name": "HCL Technologies Ltd.",
+      "isin": "INE860A01027",
+      "sector": "IT - Software",
+      "weight_pct": 4.48
+    },
+    {
+      "rank": 10,
+      "key": "INE585B01010",
+      "name": "Maruti Suzuki India Ltd.",
+      "isin": "INE585B01010",
+      "sector": "Automobiles",
+      "weight_pct": 3.84
+    }
+  ]
+}
