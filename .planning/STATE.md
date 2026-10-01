@@ -1,10 +1,10 @@
 # STATE: Mutual Fund Top-10 Holdings Tracker
 
 ## Current Phase
-Phase 3 (Diff Engine + Snapshots + Backfill) — **COMPLETED**
+Phase 4 (GitHub Actions Workflow) — **PLAN READY**
 
 ## Next Action
-Begin Phase 4: GitHub Actions Workflow
+Execute Phase 4 (Implement Tasks 1 through 4 according to `.planning/phases/04-github-actions-workflow/PLAN.md`)
 
 ## Decisions Log
 | # | Decision | Rationale | Date |
@@ -20,6 +20,8 @@ Begin Phase 4: GitHub Actions Workflow
 | 9 | Dynamic PDF page discovery | Factsheet page positions vary across months (p3 in June/Aug 2026, p7 in July 2026); scan scheme + table headers dynamically | 2026-10-02 |
 | 10 | Deterministic canonical key diffing | Match holdings by ISIN/canonical slug to prevent renames from creating spurious enter/exit churn | 2026-10-02 |
 | 11 | Neutral portfolio wording | Use "weight increased/decreased" and "entered/exited top 10" rather than speculative trading terms | 2026-10-02 |
+| 12 | Dedicated pipeline runner script | `pipeline/run.py` isolates automation logic from GitHub Actions YAML, enabling local testability | 2026-10-02 |
+| 13 | Targeted publication window cron | `30 0,12 3-20 * *` (days 3–20, 6 AM & 6 PM IST) aligns with Indian AMC monthly release cycles | 2026-10-02 |
 
 ## Open Questions
 _None currently._
