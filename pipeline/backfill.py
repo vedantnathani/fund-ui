@@ -9,7 +9,9 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import re
 import sys
+from datetime import datetime, date
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -25,6 +27,64 @@ from pipeline.scrape import Scraper
 
 logger = logging.getLogger(__name__)
 
+_MONTH_RE = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
+
+
+def parse_month(value: str) -> str:
+    """Validate and return a YYYY-MM string; raise ArgumentTypeError if invalid."""
+    if not _MONTH_RE.match(value):
+        raise argparse.ArgumentTypeError(
+            f"Invalid month format '{value}'. Expected YYYY-MM (e.g. 2026-08)."
+        )
+    return value
+
+
+def month_range(start: str, end: str) -> List[str]:
+    """Return a sorted list of YYYY-MM strings from start to end inclusive.
+
+    Args:
+        start: First month as YYYY-MM string.
+        end: Last month as YYYY-MM string (inclusive).
+
+    Returns:
+        List of YYYY-MM strings in chronological order.
+
+    Raises:
+        ValueError: If start is after end.
+    """
+    s_year, s_month = int(start[:4]), int(start[5:])
+    e_year, e_month = int(end[:4]), int(end[5:])
+
+    if (s_year, s_month) > (e_year, e_month):
+        raise ValueError(f"start '{start}' must not be after end '{end}'")
+
+    months: List[str] = []
+    cur_year, cur_month = s_year, s_month
+    while (cur_year, cur_month) <= (e_year, e_month):
+        months.append(f"{cur_year:04d}-{cur_month:02d}")
+        cur_month += 1
+        if cur_month > 12:
+            cur_month = 1
+            cur_year += 1
+    return months
+
+
+def _default_start_month(months_back: int) -> str:
+    """Compute YYYY-MM for `months_back` months before today."""
+    today = date.today()
+    year = today.year
+    month = today.month - months_back
+    while month <= 0:
+        month += 12
+        year -= 1
+    return f"{year:04d}-{month:02d}"
+
+
+def _current_month() -> str:
+    """Return current month as YYYY-MM."""
+    today = date.today()
+    return f"{today.year:04d}-{today.month:02d}"
+
 
 def run_fixtures_backfill(
     fund_id: str = "all",
@@ -32,10 +92,13 @@ def run_fixtures_backfill(
     data_dir: str = "data",
     dry_run: bool = False,
     config_path: str = "config/funds.json",
+    start_month: str = "2026-06",
+    end_month: str = "2026-08",
 ) -> None:
     """
     Backfill using local fixture files (June, July, August 2026).
     Supports backfilling a single fund or all enabled funds.
+    Only processes months within [start_month, end_month].
     """
     with open(config_path, "r", encoding="utf-8") as f:
         funds = json.load(f)
@@ -51,7 +114,7 @@ def run_fixtures_backfill(
     diff_engine = DiffEngine(significant_threshold_pp=0.5)
     fix_path = Path(fixtures_dir)
 
-    months_plan = [
+    all_fixture_months = [
         {"month": "2026-06", "pdf": fix_path / "factsheet-2026-06.pdf", "excel": None},
         {"month": "2026-07", "pdf": fix_path / "factsheet-2026-07.pdf", "excel": None},
         {
@@ -60,6 +123,13 @@ def run_fixtures_backfill(
             "excel": fix_path / "portfolio-disclosure-2026-08.xls",
         },
     ]
+
+    # Filter fixture months to requested date range
+    valid_months = set(month_range(start_month, end_month))
+    months_plan = [item for item in all_fixture_months if item["month"] in valid_months]
+    logger.info(
+        f"Filtered fixture months to {len(months_plan)} in range [{start_month}, {end_month}]"
+    )
 
     for fund in target_funds:
         fid = fund["id"]
@@ -72,6 +142,14 @@ def run_fixtures_backfill(
 
         for item in months_plan:
             m = item["month"]
+            # Idempotency: skip months already on disk
+            snap_file = Path(data_dir) / fid / f"{m}.json"
+            if not dry_run and snap_file.exists():
+                logger.info(f"Snapshot {snap_file} already exists — loading from disk, skipping re-parse.")
+                with open(snap_file, "r", encoding="utf-8") as f:
+                    snapshots[m] = json.load(f)
+                continue
+
             logger.info(f"Processing month {m} for {fid}...")
             snap = orchestrator.parse_with_fallback(
                 fund_id=fid,
@@ -81,7 +159,6 @@ def run_fixtures_backfill(
             snapshots[m] = snap
 
             if not dry_run:
-                snap_file = target_data_dir / f"{m}.json"
                 with open(snap_file, "w", encoding="utf-8") as f:
                     json.dump(snap, f, indent=2)
                 logger.info(f"Saved snapshot: {snap_file}")
@@ -110,15 +187,33 @@ def run_fixtures_backfill(
 
 def run_online_backfill(
     fund_id: str = "ppfas-flexicap",
+    start_month: Optional[str] = None,
+    end_month: Optional[str] = None,
+    # Legacy param kept for backwards compatibility; ignored when start_month is provided
     months_count: int = 12,
     data_dir: str = "data",
     cache_dir: str = "data/cache",
     dry_run: bool = False,
 ) -> None:
     """
-    Backfill up to `months_count` months by scraping live download links.
+    Backfill by scraping live download links, filtered to [start_month, end_month].
+
+    Args:
+        fund_id: Target fund ID.
+        start_month: Earliest month to backfill (YYYY-MM, inclusive).
+        end_month: Latest month to backfill (YYYY-MM, inclusive).
+        months_count: Legacy — number of most recent months (ignored when start_month given).
+        data_dir: Root data directory.
+        cache_dir: Directory to cache downloaded files.
+        dry_run: If True, simulate without writing files.
     """
-    logger.info(f"Starting online backfill for {fund_id} (target: {months_count} months)...")
+    # Resolve date range
+    resolved_end = end_month or _current_month()
+    resolved_start = start_month or _default_start_month(months_count)
+
+    logger.info(
+        f"Starting online backfill for '{fund_id}' in range [{resolved_start}, {resolved_end}]..."
+    )
     orchestrator = ParserOrchestrator()
     diff_engine = DiffEngine(significant_threshold_pp=0.5)
     fund = orchestrator.get_fund(fund_id)
@@ -127,8 +222,13 @@ def run_online_backfill(
     html = scraper.fetch_page(fund["source_page"])
     discovered = scraper.discover_ppfas_links(html, fund["source_page"])
 
-    targets = discovered[:months_count]
-    logger.info(f"Discovered {len(targets)} months to process.")
+    # Filter discovered months to requested range
+    valid_months = set(month_range(resolved_start, resolved_end))
+    targets = [item for item in discovered if item["month"] in valid_months]
+    logger.info(
+        f"Filtered to {len(targets)} months in range [{resolved_start}, {resolved_end}] "
+        f"(from {len(discovered)} discovered)"
+    )
 
     fund_cache_dir = Path(cache_dir) / fund_id
     target_data_dir = Path(data_dir) / fund_id
@@ -140,6 +240,15 @@ def run_online_backfill(
 
     for item in targets:
         m = item["month"]
+        snap_file = target_data_dir / f"{m}.json"
+
+        # Idempotency: load existing snapshots from disk instead of re-downloading
+        if snap_file.exists():
+            logger.info(f"Snapshot {snap_file} already exists — loading from disk, skipping re-download.")
+            with open(snap_file, "r", encoding="utf-8") as f:
+                snapshots[m] = json.load(f)
+            continue
+
         logger.info(f"--- Processing {m} ---")
         excel_path = None
         pdf_path = None
@@ -163,7 +272,6 @@ def run_online_backfill(
                     source_url=item["excel_url"] or item["pdf_url"],
                 )
                 snapshots[m] = snap
-                snap_file = target_data_dir / f"{m}.json"
                 with open(snap_file, "w", encoding="utf-8") as f:
                     json.dump(snap, f, indent=2)
                 logger.info(f"Saved snapshot {snap_file}")
@@ -191,17 +299,54 @@ def run_online_backfill(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Backfill mutual fund snapshots and diffs")
     parser.add_argument("--fund-id", default="all", help="Target fund ID (or 'all')")
-    parser.add_argument("--months", type=int, default=12, help="Number of months to backfill")
+    parser.add_argument(
+        "--start",
+        dest="start_month",
+        type=parse_month,
+        default=None,
+        metavar="YYYY-MM",
+        help="Earliest month to backfill (inclusive). Overrides --months.",
+    )
+    parser.add_argument(
+        "--end",
+        dest="end_month",
+        type=parse_month,
+        default=None,
+        metavar="YYYY-MM",
+        help="Latest month to backfill (inclusive). Defaults to current month.",
+    )
+    parser.add_argument(
+        "--months",
+        type=int,
+        default=12,
+        help="Number of most-recent months to backfill. Ignored when --start is provided.",
+    )
     parser.add_argument("--fixtures-only", action="store_true", help="Use local test fixtures only")
     parser.add_argument("--dry-run", action="store_true", help="Simulate without writing files")
     parser.add_argument("--data-dir", default="data", help="Target data directory")
     args = parser.parse_args()
 
+    # Warn if --months is given alongside --start (--start wins)
+    if args.start_month and args.months != 12:
+        logger.warning("--months is ignored when --start is provided. Using --start.")
+
+    # Resolve start/end for fixtures mode
+    resolved_start = args.start_month or "2026-06"
+    resolved_end = args.end_month or "2026-08"
+
     if args.fixtures_only:
-        run_fixtures_backfill(fund_id=args.fund_id, data_dir=args.data_dir, dry_run=args.dry_run)
+        run_fixtures_backfill(
+            fund_id=args.fund_id,
+            data_dir=args.data_dir,
+            dry_run=args.dry_run,
+            start_month=resolved_start,
+            end_month=resolved_end,
+        )
     else:
         run_online_backfill(
             fund_id=args.fund_id,
+            start_month=args.start_month,
+            end_month=args.end_month,
             months_count=args.months,
             data_dir=args.data_dir,
             dry_run=args.dry_run,
