@@ -13,7 +13,7 @@
       "pdf_text"
     ],
     "significant_change_pp": 0.5,
-    "enabled": false
+    "enabled": true
   },
   {
     "id": "ppfas-taxsaver",
