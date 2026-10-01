@@ -1,12 +1,54 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Link from 'next/link';
 import { Activity, ShieldCheck, Layers } from 'lucide-react';
 
+export const viewport: Viewport = {
+  themeColor: '#0B0F17',
+  colorScheme: 'dark',
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: 'Mutual Fund Top-10 Holdings Tracker',
+  metadataBase: new URL('https://fund-ui.vercel.app'),
+  title: {
+    default: 'FundLens — Mutual Fund Top-10 Holdings Tracker',
+    template: '%s | FundLens',
+  },
   description:
-    'Monitor mutual fund monthly factsheets, extract top-10 equity holdings, track month-over-month portfolio movements, and analyze trends.',
+    'Automated monthly surveillance of Indian mutual fund factsheets & portfolio disclosures. Track top-10 equity holdings, detect month-over-month weight shifts, and inspect verified AI commentary.',
+  keywords: [
+    'mutual funds',
+    'portfolio tracker',
+    'top 10 holdings',
+    'PPFAS',
+    'equity disclosures',
+    'factsheet parser',
+    'financial analytics',
+    'Indian mutual funds',
+  ],
+  authors: [{ name: 'Vedant Nathani' }],
+  creator: 'Vedant Nathani',
+  openGraph: {
+    title: 'FundLens — Mutual Fund Top-10 Holdings Tracker',
+    description:
+      'Automated surveillance of Indian mutual fund factsheets & portfolio disclosures. Track top-10 holdings and MoM shifts.',
+    url: 'https://fund-ui.vercel.app',
+    siteName: 'FundLens',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FundLens — Mutual Fund Top-10 Holdings Tracker',
+    description:
+      'Automated surveillance of Indian mutual fund factsheets & portfolio disclosures.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
