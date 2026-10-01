@@ -8,6 +8,7 @@ import {
 } from '@/lib/data';
 import HoldingHistoryChart from '@/components/HoldingHistoryChart';
 import BackfillButton from '@/components/BackfillButton';
+import MonthSelector from '@/components/MonthSelector';
 import {
   ArrowLeft,
   Building2,
@@ -118,7 +119,7 @@ export default async function FundDetailPage({ params, searchParams }: FundPageP
             </p>
           </div>
 
-          {/* Month Selector Pills */}
+          {/* Month Selector */}
           <div className="space-y-2">
             <div className="flex items-center justify-between gap-3">
               <span className="text-xs font-medium text-gray-400 block">Select Reporting Month:</span>
@@ -130,24 +131,11 @@ export default async function FundDetailPage({ params, searchParams }: FundPageP
                 label="Fetch Data"
               />
             </div>
-            <div className="flex items-center gap-2 overflow-x-auto pb-1">
-              {availableMonths.map((m) => {
-                const isActive = m === currentMonth;
-                return (
-                  <Link
-                    key={m}
-                    href={`/fund/${id}?month=${m}`}
-                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                      isActive
-                        ? 'bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-500/25 border border-indigo-400/30'
-                        : 'bg-white/[0.04] text-gray-400 hover:text-white hover:bg-white/[0.08] border border-white/5'
-                    }`}
-                  >
-                    {m}
-                  </Link>
-                );
-              })}
-            </div>
+            <MonthSelector
+              fundId={id}
+              currentMonth={currentMonth}
+              availableMonths={availableMonths}
+            />
           </div>
         </div>
 
