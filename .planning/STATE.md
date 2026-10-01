@@ -1,10 +1,10 @@
 # STATE: Mutual Fund Top-10 Holdings Tracker
 
 ## Current Phase
-Phase 4 (GitHub Actions Workflow) — **COMPLETED**
+Phase 5 (Dashboard) — **PLAN READY**
 
 ## Next Action
-Begin Phase 5: Dashboard (Next.js App Router, Tailwind, Recharts)
+Execute Phase 5 (Scaffold Next.js app in `web/`, build components, and verify static compilation)
 
 ## Decisions Log
 | # | Decision | Rationale | Date |
@@ -22,6 +22,7 @@ Begin Phase 5: Dashboard (Next.js App Router, Tailwind, Recharts)
 | 11 | Neutral portfolio wording | Use "weight increased/decreased" and "entered/exited top 10" rather than speculative trading terms | 2026-10-02 |
 | 12 | Dedicated pipeline runner script | `pipeline/run.py` isolates automation logic from GitHub Actions YAML, enabling local testability | 2026-10-02 |
 | 13 | Targeted publication window cron | `30 0,12 3-20 * *` (days 3–20, 6 AM & 6 PM IST) aligns with Indian AMC monthly release cycles | 2026-10-02 |
+| 14 | Pre-computed JSON data loader | `web/src/lib/data.ts` loads static JSON from filesystem; prebuild script mirrors `data/` for Vercel Hobby zero-config deployment | 2026-10-02 |
 
 ## Open Questions
 _None currently._
