@@ -1,10 +1,10 @@
 # STATE: Mutual Fund Top-10 Holdings Tracker
 
 ## Current Phase
-Phase 2 (Scraper + Parser + Validator) — **COMPLETED**
+Phase 3 (Diff Engine + Snapshots + Backfill) — **PLAN READY**
 
 ## Next Action
-Begin Phase 3: Diff Engine + Snapshots + Backfill
+Execute Phase 3 (Implement Tasks 1 through 5 according to `.planning/phases/03-diff-engine-snapshots-backfill/PLAN.md`)
 
 ## Decisions Log
 | # | Decision | Rationale | Date |
@@ -18,6 +18,8 @@ Begin Phase 3: Diff Engine + Snapshots + Backfill
 | 7 | PPFAS Excel uses OpenXML container | Despite `.xls` extension, openpyxl engine works; implement auto-fallback to xlrd | 2026-10-02 |
 | 8 | Multi-section equity extraction | Foreign equities (Alphabet, Microsoft, etc.) reside in a separate sub-table; parser must aggregate domestic + foreign | 2026-10-02 |
 | 9 | Dynamic PDF page discovery | Factsheet page positions vary across months (p3 in June/Aug 2026, p7 in July 2026); scan scheme + table headers dynamically | 2026-10-02 |
+| 10 | Deterministic canonical key diffing | Match holdings by ISIN/canonical slug to prevent renames from creating spurious enter/exit churn | 2026-10-02 |
+| 11 | Neutral portfolio wording | Use "weight increased/decreased" and "entered/exited top 10" rather than speculative trading terms | 2026-10-02 |
 
 ## Open Questions
 _None currently._
