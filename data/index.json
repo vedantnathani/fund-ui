@@ -1,0 +1,42 @@
+{
+  "last_updated": "2026-10-01T19:36:42.404980+00:00",
+  "total_funds": 1,
+  "funds": [
+    {
+      "id": "ppfas-flexicap",
+      "name": "Parag Parikh Flexi Cap Fund",
+      "amc": "PPFAS Mutual Fund",
+      "category": "Equity Fund",
+      "type": "equity",
+      "latest_month": "2026-08",
+      "latest_as_of": "2026-08-31",
+      "top10_total_pct": 50.96,
+      "top_holding": {
+        "name": "HDFC Bank Ltd.",
+        "weight_pct": 7.63
+      },
+      "months_available": [
+        "2026-08",
+        "2026-07",
+        "2026-06"
+      ],
+      "latest_changes_count": 0,
+      "latest_diff_summary": {
+        "num_entered": 0,
+        "num_exited": 0,
+        "num_increased": 6,
+        "num_decreased": 4,
+        "num_unchanged": 0,
+        "num_significant": 0,
+        "biggest_increase": {
+          "name": "Kotak Mahindra Bank Ltd.",
+          "weight_delta_pp": 0.33
+        },
+        "biggest_decrease": {
+          "name": "ITC Ltd.",
+          "weight_delta_pp": -0.48
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "fund_id": "ppfas-flexicap",
+  "as_of": "2026-08-31",
+  "source_url": "",
+  "source_type": "excel",
+  "file_sha256": "3db5e8b12328fa207bef7912a39169a39dfecb6bbef4c2f1d2e819cae5357305",
+  "top10_total_pct": 50.96,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "INE040A01034",
+      "name": "HDFC Bank Ltd.",
+      "isin": "INE040A01034",
+      "sector": "Banks",
+      "weight_pct": 7.63
+    },
+    {
+      "rank": 2,
+      "key": "INE090A01021",
+      "name": "ICICI Bank Ltd.",
+      "isin": "INE090A01021",
+      "sector": "Banks",
+      "weight_pct": 5.67
+    },
+    {
+      "rank": 3,
+      "key": "INE752E01010",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": "INE752E01010",
+      "sector": "Power",
+      "weight_pct": 5.58
+    },
+    {
+      "rank": 4,
+      "key": "INE154A01025",
+      "name": "ITC Ltd.",
+      "isin": "INE154A01025",
+      "sector": "Diversified FMCG",
+      "weight_pct": 5.26
+    },
+    {
+      "rank": 5,
+      "key": "INE118A01012",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": "INE118A01012",
+      "sector": "Finance",
+      "weight_pct": 5.14
+    },
+    {
+      "rank": 6,
+      "key": "INE522F01014",
+      "name": "Coal India Ltd.",
+      "isin": "INE522F01014",
+      "sector": "Consumable Fuels",
+      "weight_pct": 5.02
+    },
+    {
+      "rank": 7,
+      "key": "INE237A01036",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "isin": "INE237A01036",
+      "sector": "Banks",
+      "weight_pct": 4.4
+    },
+    {
+      "rank": 8,
+      "key": "INE860A01027",
+      "name": "HCL Technologies Ltd.",
+      "isin": "INE860A01027",
+      "sector": "IT - Software",
+      "weight_pct": 4.15
+    },
+    {
+      "rank": 9,
+      "key": "US02079K3059",
+      "name": "Alphabet Inc.",
+      "isin": "US02079K3059",
+      "sector": "Computer Software: Programming, Data Processing",
+      "weight_pct": 4.14
+    },
+    {
+      "rank": 10,
+      "key": "INE101A01026",
+      "name": "Mahindra & Mahindra Ltd.",
+      "isin": "INE101A01026",
+      "sector": "Automobiles",
+      "weight_pct": 3.97
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "fund_id": "ppfas-flexicap",
+  "as_of": "2026-07-31",
+  "source_url": "",
+  "source_type": "pdf_text",
+  "file_sha256": "0fa885c48d25c0876c13d3a70ada62b0146db9f95219a18944e0e3a0d46217ef",
+  "top10_total_pct": 51.02,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "hdfc-bank-ltd",
+      "name": "HDFC Bank Ltd.",
+      "isin": null,
+      "sector": "Banks",
+      "weight_pct": 7.55
+    },
+    {
+      "rank": 2,
+      "key": "power-grid-corp-of-india-ltd",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": null,
+      "sector": "Power",
+      "weight_pct": 5.98
+    },
+    {
+      "rank": 3,
+      "key": "itc-ltd",
+      "name": "ITC Ltd.",
+      "isin": null,
+      "sector": "Diversified FMCG",
+      "weight_pct": 5.74
+    },
+    {
+      "rank": 4,
+      "key": "icici-bank-ltd",
+      "name": "ICICI Bank Ltd.",
+      "isin": null,
+      "sector": "Banks",
+      "weight_pct": 5.56
+    },
+    {
+      "rank": 5,
+      "key": "coal-india-ltd",
+      "name": "Coal India Ltd.",
+      "isin": null,
+      "sector": "Consumable Fuels",
+      "weight_pct": 4.91
+    },
+    {
+      "rank": 6,
+      "key": "bajaj-holdings-investment-ltd",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": null,
+      "sector": "Finance",
+      "weight_pct": 4.85
+    },
+    {
+      "rank": 7,
+      "key": "alphabet-inc",
+      "name": "Alphabet Inc.",
+      "isin": null,
+      "sector": "Computer Software",
+      "weight_pct": 4.33
+    },
+    {
+      "rank": 8,
+      "key": "hcl-technologies-ltd",
+      "name": "HCL Technologies Ltd.",
+      "isin": null,
+      "sector": "IT - Software",
+      "weight_pct": 4.23
+    },
+    {
+      "rank": 9,
+      "key": "kotak-mahindra-bank-ltd",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "isin": null,
+      "sector": "Banks",
+      "weight_pct": 4.07
+    },
+    {
+      "rank": 10,
+      "key": "mahindra-mahindra-ltd",
+      "name": "Mahindra & Mahindra Ltd.",
+      "isin": null,
+      "sector": "Automobiles",
+      "weight_pct": 3.8
+    }
+  ]
+}
