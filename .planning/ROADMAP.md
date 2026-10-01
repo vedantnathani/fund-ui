@@ -80,10 +80,11 @@
 
 ## Milestone 2: Polish & Documentation (v1.0)
 
-### Phase 8: README & Documentation
-**Status**: TODO
+### Phase 8: README & Documentation ✅
+**Status**: DONE
 **Goal**: Complete project documentation.
 **Deliverables**:
 - README.md with setup, add-a-fund guide, secrets guide, local run guide
-- Architecture diagram
-- Contribution guide
+- Architecture diagram & design principles
+- MIT License
+- 37/37 passing tests verified against all documented commands
