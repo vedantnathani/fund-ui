@@ -1,3 +1,17 @@
+export interface FundConfig {
+  id: string;
+  name: string;
+  amc: string;
+  type: 'equity' | 'debt' | 'hybrid' | 'liquid';
+  category?: string;
+  source_page: string;
+  excel_sheet?: string;
+  pdf_section_keyword?: string;
+  parser_preference: string[];
+  significant_change_pp: number;
+  enabled: boolean;
+}
+
 export interface Holding {
   rank: number;
   key: string;

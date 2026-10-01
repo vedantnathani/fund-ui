@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Link from 'next/link';
-import { Activity, ShieldCheck, Layers } from 'lucide-react';
+import { Activity, ShieldCheck, Layers, Settings } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Mutual Fund Top-10 Holdings Tracker',
@@ -48,6 +48,14 @@ export default function RootLayout({
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 Automated Pipeline Active
               </div>
+
+              <Link
+                href="/manage"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-colors border border-white/5"
+              >
+                <Settings className="w-3.5 h-3.5" />
+                Manage
+              </Link>
 
               <a
                 href="https://github.com"

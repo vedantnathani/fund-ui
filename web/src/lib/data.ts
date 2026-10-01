@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { Diff, FundIndex, HistoryDataPoint, Snapshot } from '@/types';
+import { Diff, FundConfig, FundIndex, HistoryDataPoint, Snapshot } from '@/types';
 
 // Statically scope data directory to public/data (mirrored by prebuild) or ../data
 function getDataDir(): string {
@@ -117,5 +117,31 @@ export async function getFundHistory(fundId: string): Promise<{ data: HistoryDat
   } catch (error) {
     console.error(`Error reading history for ${fundId}:`, error);
     return { data: [], holdings: [] };
+  }
+}
+
+export async function getFundsConfig(): Promise<FundConfig[]> {
+  // Try repo root config (works in dev and local build)
+  const rootConfig = path.join(process.cwd(), '..', 'config', 'funds.json');
+  // Fallback to public/funds.json (Vercel — copied by prebuild)
+  const publicConfig = path.join(process.cwd(), 'public', 'funds.json');
+
+  const configPath = fs.existsSync(rootConfig)
+    ? rootConfig
+    : fs.existsSync(publicConfig)
+      ? publicConfig
+      : null;
+
+  if (!configPath) {
+    console.warn('funds.json not found at root or public/funds.json');
+    return [];
+  }
+
+  try {
+    const raw = fs.readFileSync(configPath, 'utf-8');
+    return JSON.parse(raw) as FundConfig[];
+  } catch (error) {
+    console.error('Error reading funds config:', error);
+    return [];
   }
 }

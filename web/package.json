@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "node -e 'const fs=require(\"fs\"); const p=\"public/data\"; if(fs.existsSync(\"../data\")){fs.cpSync(\"../data\", p, {recursive: true}); console.log(\"Synced data to public/data\");}'",
+    "prebuild": "node -e 'const fs=require(\"fs\"); const p=\"public/data\"; if(fs.existsSync(\"../data\")){fs.cpSync(\"../data\", p, {recursive: true}); console.log(\"Synced data to public/data\");} if(fs.existsSync(\"../config/funds.json\")){fs.copyFileSync(\"../config/funds.json\",\"public/funds.json\"); console.log(\"Synced config/funds.json to public/funds.json\");}'",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
