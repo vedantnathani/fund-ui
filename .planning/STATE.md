@@ -1,10 +1,10 @@
 # STATE: Mutual Fund Top-10 Holdings Tracker
 
 ## Current Phase
-Phase 2 (Scraper + Parser + Validator) — **PLAN READY**
+Phase 2 (Scraper + Parser + Validator) — **COMPLETED**
 
 ## Next Action
-Execute Phase 2 (Implement Tasks 1 through 8 according to `.planning/phases/02-scraper-parser-validator/PLAN.md`)
+Begin Phase 3: Diff Engine + Snapshots + Backfill
 
 ## Decisions Log
 | # | Decision | Rationale | Date |

@@ -10,8 +10,8 @@
 - 3 factsheet PDFs + 1 portfolio disclosure XLS downloaded as fixtures
 - Parser strategy determined: Excel primary, PDF fallback
 
-### Phase 2: Scraper + Parser + Validator
-**Status**: TODO
+### Phase 2: Scraper + Parser + Validator ✅
+**Status**: DONE
 **Goal**: Build the complete extraction pipeline for PPFAS Flexi Cap, validated against real fixtures.
 **Deliverables**:
 - `config/funds.json` — fund registry with PPFAS Flexi Cap entry
