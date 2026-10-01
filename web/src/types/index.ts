@@ -49,6 +49,13 @@ export interface DiffSummary {
   biggest_decrease?: MoverInfo | null;
 }
 
+export interface AISummary {
+  text: string;
+  provider: string;
+  verified: boolean;
+  generated_at: string;
+}
+
 export interface Diff {
   fund_id: string;
   current_month: string;
@@ -63,6 +70,7 @@ export interface Diff {
   retained: DiffHolding[];
   summary: DiffSummary;
   amc_commentary?: string | null;
+  ai_summary?: AISummary | null;
 }
 
 export interface FundSummary {

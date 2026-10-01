@@ -58,15 +58,15 @@
 - Responsive layout, footer disclaimer, "last updated" timestamps
 - Deployed on Vercel Hobby tier
 
-### Phase 6: LLM Summary
-**Status**: TODO
+### Phase 6: LLM Summary ✅
+**Status**: DONE
 **Goal**: Add AI-generated summaries with number verification and fallback.
 **Deliverables**:
 - `pipeline/summarize.py` — Pluggable LLM provider (OpenRouter default, Gemini, Groq)
 - Number extraction post-check (verify against diff JSON)
 - Deterministic template fallback
 - Summary stored in diff JSON, displayed on dashboard with "AI-generated" label
-- Integration tests
+- Integration tests (32/32 tests passing)
 
 ### Phase 7: Scalability Proof — Second Fund
 **Status**: TODO

@@ -1,10 +1,10 @@
 # STATE: Mutual Fund Top-10 Holdings Tracker
 
 ## Current Phase
-Phase 6 (LLM Summary) — **PLAN READY**
+Phase 6 (LLM Summary) — **DONE** ✅
 
 ## Next Action
-Execute Phase 6 (Implement Tasks 1 through 4 according to `.planning/phases/06-llm-summary/PLAN.md`)
+Plan Phase 7: Scalability Proof — Second Fund (`/gsd-plan-phase 7`)
 
 ## Decisions Log
 | # | Decision | Rationale | Date |

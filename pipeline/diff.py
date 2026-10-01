@@ -50,10 +50,12 @@ class DiffEngine:
         current_snapshot: Dict[str, Any],
         previous_snapshot: Dict[str, Any],
         significant_change_pp: Optional[float] = None,
+        include_summary: bool = True,
     ) -> Dict[str, Any]:
         """
         Compare current snapshot against previous snapshot.
         Both inputs must follow the FR-5 snapshot schema.
+        Optionally generates an AI commentary summary with number verification.
         """
         threshold = (
             significant_change_pp
@@ -161,7 +163,7 @@ class DiffEngine:
         prev_total = round(previous_snapshot.get("top10_total_pct", sum(h["weight_pct"] for h in prev_holdings)), 2)
         total_delta = round(curr_total - prev_total, 2)
 
-        return {
+        diff_result = {
             "fund_id": fund_id,
             "current_month": curr_month,
             "previous_month": prev_month,
@@ -185,6 +187,17 @@ class DiffEngine:
             },
             "amc_commentary": current_snapshot.get("amc_commentary"),
         }
+
+        if include_summary:
+            try:
+                from pipeline.summarize import Summarizer
+                summarizer = Summarizer()
+                fund_name = current_snapshot.get("fund_name") or previous_snapshot.get("fund_name") or "Parag Parikh Flexi Cap Fund"
+                diff_result["ai_summary"] = summarizer.generate(diff_result, fund_name=fund_name)
+            except Exception as e:
+                logger.warning(f"Failed to generate AI summary for diff: {e}")
+
+        return diff_result
 
 
 def main() -> None:
