@@ -19,14 +19,32 @@ export function isGitHubConfigured(): boolean {
   return Boolean(process.env.NEXT_PUBLIC_GITHUB_REPO);
 }
 
+export async function verifyAdminPasscode(passcode: string): Promise<boolean> {
+  try {
+    const res = await fetch('/api/admin/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ passcode }),
+    });
+    const data = await res.json();
+    return Boolean(data.authenticated);
+  } catch {
+    return false;
+  }
+}
+
 async function callUpdateFund(
   action: 'add' | 'disable' | 'enable',
   fund: Partial<FundConfig> & { id: string }
 ): Promise<GithubApiResult> {
   try {
+    const adminKey = typeof window !== 'undefined' ? sessionStorage.getItem('admin_passcode') || '' : '';
     const res = await fetch('/api/github/update-fund', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-key': adminKey,
+      },
       body: JSON.stringify({ action, fund }),
     });
 

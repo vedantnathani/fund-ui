@@ -106,15 +106,22 @@ async function putFileContent(
 }
 
 export async function POST(req: NextRequest) {
+  // --- Admin Auth Guard ---
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  const adminKey = req.headers.get('x-admin-key');
+  if (adminPassword && adminKey !== adminPassword) {
+    return NextResponse.json(
+      { error: 'Unauthorized: Invalid administrator credentials' },
+      { status: 401 }
+    );
+  }
+
   // --- Auth guard ---
   const token = process.env.GH_PAT;
   if (!token) {
     return NextResponse.json(
-      {
-        error:
-          'GitHub PAT not configured. Set GH_PAT in your environment variables to enable fund management.',
-      },
-      { status: 401 }
+      { error: 'Fund management service is currently unavailable. Administrator configuration required.' },
+      { status: 503 }
     );
   }
 

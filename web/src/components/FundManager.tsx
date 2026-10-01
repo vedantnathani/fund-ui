@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import {
   Plus, Settings2, CheckCircle2, XCircle, Building2,
   ExternalLink, ToggleLeft, ToggleRight, Loader2,
-  AlertTriangle, Copy, ChevronDown, ChevronUp, Eye
+  Lock, Unlock, Eye
 } from 'lucide-react';
 import { FundConfig } from '@/types';
-import { addFund, disableFund, enableFund, isGitHubConfigured } from '@/lib/github';
+import { addFund, disableFund, enableFund, verifyAdminPasscode } from '@/lib/github';
 import Toast, { ToastVariant } from './Toast';
 
 interface FundManagerProps {
@@ -50,43 +50,66 @@ function validateForm(f: typeof DEFAULT_FORM): Record<string, string> {
   return errs;
 }
 
-// ---- PAT Setup Guide ----
-function PatSetupGuide() {
-  const [open, setOpen] = useState(false);
+// ---- Admin Lock Prompt ----
+function AdminLockPrompt({ onUnlock }: { onUnlock: (passcode: string) => void }) {
+  const [passcode, setPasscode] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!passcode.trim()) return;
+    setLoading(true);
+    setError(null);
+    const valid = await verifyAdminPasscode(passcode.trim());
+    setLoading(false);
+    if (valid) {
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('admin_passcode', passcode.trim());
+      }
+      onUnlock(passcode.trim());
+    } else {
+      setError('Incorrect administrator passcode');
+    }
+  };
+
   return (
-    <div className="rounded-2xl border border-amber-500/30 bg-amber-950/20 p-5 space-y-3">
-      <div className="flex items-start gap-3">
-        <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-        <div className="flex-1">
-          <p className="text-sm font-semibold text-amber-300">Read-only mode — GitHub PAT not configured</p>
-          <p className="text-xs text-amber-400/80 mt-1">
-            Set up a GitHub Personal Access Token to enable adding and managing funds from this UI.
-          </p>
-        </div>
-        <button onClick={() => setOpen(!open)} className="text-amber-400 hover:text-amber-300">
-          {open ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-        </button>
+    <div className="max-w-md mx-auto my-12 glass-panel rounded-2xl p-8 border border-white/10 shadow-2xl text-center space-y-6">
+      <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mx-auto">
+        <Lock className="w-6 h-6" />
       </div>
-      {open && (
-        <div className="space-y-3 text-xs text-gray-300 pt-1 border-t border-amber-500/20">
-          <p className="font-medium text-amber-300">Setup steps:</p>
-          <ol className="list-decimal list-inside space-y-2 text-gray-400">
-            <li>Go to <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer" className="text-indigo-400 underline">GitHub → Settings → Developer settings → Fine-grained PAT</a></li>
-            <li>Grant <strong className="text-white">Contents: Read & Write</strong> on your repo</li>
-            <li>Add to Vercel environment variables (or <code className="bg-black/40 px-1 rounded">.env.local</code> for dev):</li>
-          </ol>
-          <div className="bg-black/50 rounded-xl p-3 font-mono space-y-1 border border-white/10">
-            <div className="flex items-center justify-between">
-              <span className="text-emerald-400">GH_PAT=ghp_xxxxxxxxxxxx</span>
-              <button onClick={() => navigator.clipboard.writeText('GH_PAT=ghp_xxxxxxxxxxxx')} className="text-gray-500 hover:text-gray-300">
-                <Copy className="w-3.5 h-3.5" />
-              </button>
-            </div>
-            <p className="text-gray-500">NEXT_PUBLIC_GITHUB_REPO=owner/repo</p>
-            <p className="text-gray-500">NEXT_PUBLIC_GITHUB_BRANCH=main</p>
-          </div>
+      <div>
+        <h2 className="text-xl font-bold text-white">Administrator Access</h2>
+        <p className="text-xs text-gray-400 mt-1">
+          Enter administrator passcode to configure scheme tracking and pipeline settings.
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4 text-left">
+        <div>
+          <label className="block text-xs font-medium text-gray-300 mb-1.5">
+            Admin Passcode
+          </label>
+          <input
+            type="password"
+            value={passcode}
+            onChange={(e) => setPasscode(e.target.value)}
+            placeholder="••••••••••••"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            autoFocus
+          />
+          {error && <p className="text-xs text-rose-400 mt-1.5">{error}</p>}
         </div>
-      )}
+
+        <button
+          type="submit"
+          disabled={loading || !passcode}
+          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Unlock className="w-4 h-4" />}
+          {loading ? 'Verifying...' : 'Unlock Management'}
+        </button>
+      </form>
     </div>
   );
 }
@@ -423,7 +446,23 @@ export default function FundManager({ initialFunds }: FundManagerProps) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [toggling, setToggling] = useState<string | null>(null);
   const [toast, setToast] = useState<{ message: string; variant: ToastVariant } | null>(null);
-  const configured = isGitHubConfigured();
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    const saved = typeof window !== 'undefined' ? sessionStorage.getItem('admin_passcode') : null;
+    if (saved) {
+      setIsUnlocked(true);
+    }
+    setCheckingAuth(false);
+  }, []);
+
+  const handleLock = () => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('admin_passcode');
+    }
+    setIsUnlocked(false);
+  };
 
   const showToast = useCallback((message: string, variant: ToastVariant) => {
     setToast({ message, variant });
@@ -450,6 +489,18 @@ export default function FundManager({ initialFunds }: FundManagerProps) {
   const activeFunds = funds.filter((f) => f.enabled);
   const disabledFunds = funds.filter((f) => !f.enabled);
 
+  if (checkingAuth) {
+    return (
+      <div className="flex items-center justify-center py-20 text-gray-500">
+        <Loader2 className="w-6 h-6 animate-spin" />
+      </div>
+    );
+  }
+
+  if (!isUnlocked) {
+    return <AdminLockPrompt onUnlock={() => setIsUnlocked(true)} />;
+  }
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -465,19 +516,24 @@ export default function FundManager({ initialFunds }: FundManagerProps) {
             <span className="text-gray-500">{funds.length} total · {activeFunds.length} active</span>
           </p>
         </div>
-        <button
-          onClick={() => setShowAddModal(true)}
-          disabled={!configured}
-          title={!configured ? 'Configure GitHub PAT to add funds' : 'Add a new fund'}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
-        >
-          <Plus className="w-4 h-4" />
-          Add New Fund
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleLock}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 border border-white/10 transition-all"
+            title="Lock admin session"
+          >
+            <Lock className="w-3.5 h-3.5" />
+            Lock
+          </button>
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 transition-all shrink-0"
+          >
+            <Plus className="w-4 h-4" />
+            Add New Fund
+          </button>
+        </div>
       </div>
-
-      {/* PAT setup guide */}
-      {!configured && <PatSetupGuide />}
 
       {/* Active Funds */}
       <section className="space-y-3">

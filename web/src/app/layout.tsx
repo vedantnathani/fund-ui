@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Link from 'next/link';
-import { Activity, ShieldCheck, Layers, Settings } from 'lucide-react';
+import { Activity, ShieldCheck, Layers } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Mutual Fund Top-10 Holdings Tracker',
@@ -49,16 +49,8 @@ export default function RootLayout({
                 Automated Pipeline Active
               </div>
 
-              <Link
-                href="/manage"
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-colors border border-white/5"
-              >
-                <Settings className="w-3.5 h-3.5" />
-                Manage
-              </Link>
-
               <a
-                href="https://github.com"
+                href="https://github.com/vedantnathani/fund-ui"
                 target="_blank"
                 rel="noreferrer"
                 className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
@@ -95,7 +87,9 @@ export default function RootLayout({
               <div className="flex items-center gap-4">
                 <span>Free Next.js + GitHub Actions Architecture</span>
                 <span>•</span>
-                <span>Zero Paid APIs</span>
+                <Link href="/manage" className="hover:text-gray-400 transition-colors">
+                  Admin
+                </Link>
               </div>
             </div>
           </div>
