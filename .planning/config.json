@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "project_name": "mf-holdings-tracker",
+  "created": "2026-10-02",
+  "workflow": {
+    "require_discussion": true,
+    "require_plan_review": true,
+    "require_tests": true,
+    "require_verification": true,
+    "auto_commit": true,
+    "commit_after_phase": true
+  },
+  "preferences": {
+    "language": "python+typescript",
+    "test_framework": "pytest+jest",
+    "style": "conventional-commits",
+    "verbosity": "detailed"
+  }
+}

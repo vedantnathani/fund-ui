@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ppfas-flexicap",
+    "name": "Parag Parikh Flexi Cap Fund",
+    "amc": "PPFAS Mutual Fund",
+    "type": "equity",
+    "source_page": "https://amc.ppfas.com/downloads/factsheet/",
+    "excel_sheet": "PPFCF",
+    "pdf_section_keyword": "Parag Parikh Flexi Cap Fund",
+    "parser_preference": ["excel", "pdf_text"],
+    "significant_change_pp": 0.5,
+    "enabled": true
+  }
+]
