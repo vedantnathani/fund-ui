@@ -30,5 +30,21 @@
     ],
     "significant_change_pp": 0.5,
     "enabled": true
+  },
+  {
+    "id": "motilal-oswal-midcap-fund",
+    "name": "Motilal Oswal Midcap Fund",
+    "amc": "Motilal Oswal",
+    "type": "equity",
+    "category": "Mid Cap",
+    "source_page": "https://www.motilaloswalmf.com/downloads/factsheets",
+    "excel_sheet": "MLMC",
+    "pdf_section_keyword": "Portfolio",
+    "parser_preference": [
+      "pdf_text",
+      "excel"
+    ],
+    "significant_change_pp": 0.5,
+    "enabled": true
   }
 ]
