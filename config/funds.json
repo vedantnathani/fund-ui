@@ -39,7 +39,7 @@
     "category": "Mid Cap",
     "source_page": "https://www.motilaloswalmf.com/downloads/factsheets",
     "excel_sheet": "MLMC",
-    "pdf_section_keyword": "Portfolio",
+    "pdf_section_keyword": "Motilal Oswal Midcap Fund",
     "parser_preference": [
       "pdf_text",
       "excel"

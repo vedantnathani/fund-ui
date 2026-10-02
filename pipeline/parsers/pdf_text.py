@@ -97,10 +97,15 @@ class PDFTextParser:
 
             amc_commentary = self._extract_commentary(pdf, page_idx, section_keyword)
 
+            scheme_name = (
+                section_keyword
+                if "fund" in section_keyword.lower()
+                else f"Parag Parikh {section_keyword} Fund"
+            )
             return {
                 "source_type": "pdf_text",
                 "file_name": self.file_path.name,
-                "scheme_name": f"Parag Parikh {section_keyword} Fund",
+                "scheme_name": scheme_name,
                 "as_of": as_of_date,
                 "top10_total_pct": top10_sum,
                 "total_equities_found": len(holdings),
@@ -151,6 +156,23 @@ class PDFTextParser:
                 continue
 
             tables = page.extract_tables() or []
+
+            # Check 1: Multi-table / split-column layout (e.g., Motilal Oswal with 'Scrip' and 'Weightage (%)')
+            scrip_tables = []
+            for t_idx, tbl in enumerate(tables):
+                header_flat = " ".join([re.sub(r"\s+", "", str(c).lower()) for r in tbl[:2] for c in r if c])
+                if "scrip" in header_flat and "weight" in header_flat:
+                    scrip_tables.append((t_idx, tbl))
+
+            if scrip_tables:
+                combined_rows = []
+                for _, tbl in scrip_tables:
+                    for row in tbl:
+                        combined_rows.append(row)
+                if len(combined_rows) >= 10:
+                    return page_idx, scrip_tables[0][0], combined_rows
+
+            # Check 2: Single combined table (e.g., PPFAS)
             for table_idx, tbl in enumerate(tables):
                 if len(tbl) < 20:
                     continue
@@ -180,6 +202,37 @@ class PDFTextParser:
         in_foreign = False
 
         for row in table:
+            # Check 2-column format where col 0 is scrip name and col 1 is weight (e.g., Motilal Oswal)
+            if len(row) >= 2 and row[0] and row[1]:
+                scrip_col = str(row[0]).strip()
+                wt_col = str(row[1]).replace("%", "").strip()
+                clean_scrip_norm = re.sub(r"\s+", "", scrip_col.lower())
+
+                if clean_scrip_norm in (
+                    "scrip",
+                    "equity&equityrelated",
+                    "total",
+                    "cblo/repo/treps",
+                    "netreceivables/(payables)",
+                    "grandtotal",
+                ):
+                    continue
+
+                try:
+                    wt_val = float(wt_col)
+                    if wt_val > 0:
+                        clean_name, extracted_sector = self._clean_company_and_sector(scrip_col)
+                        holdings.append({
+                            "name": clean_name,
+                            "isin": None,
+                            "sector": extracted_sector or "Equity",
+                            "weight_pct": round(wt_val, 2),
+                            "is_foreign": False,
+                        })
+                        continue
+                except ValueError:
+                    pass
+
             row_text = " ".join([str(c).replace("\n", " ") for c in row if c]).strip()
             row_lower = row_text.lower()
 

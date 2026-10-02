@@ -1,0 +1,92 @@
+{
+  "fund_id": "motilal-oswal-midcap-fund",
+  "fund_name": "Motilal Oswal Midcap Fund",
+  "as_of": "2026-08-31",
+  "source_url": "",
+  "source_type": "pdf_text",
+  "file_sha256": "68588783aea1139fa8c249a7cfb2bff5aedacebd6b16422fb17458055afbdb0d",
+  "top10_total_pct": 54.5,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "one-97-communications-ltd",
+      "name": "One 97 Communications Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 9.1
+    },
+    {
+      "rank": 2,
+      "key": "kalyan-jewellers-india-ltd",
+      "name": "Kalyan Jewellers India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 8.1
+    },
+    {
+      "rank": 3,
+      "key": "eternal-ltd",
+      "name": "Eternal Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 6.5
+    },
+    {
+      "rank": 4,
+      "key": "coforge-ltd",
+      "name": "Coforge Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 5.8
+    },
+    {
+      "rank": 5,
+      "key": "kei-industries-ltd",
+      "name": "KEI Industries Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 5.2
+    },
+    {
+      "rank": 6,
+      "key": "aditya-birla-capital-ltd",
+      "name": "Aditya Birla Capital Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 4.9
+    },
+    {
+      "rank": 7,
+      "key": "persistent-systems-ltd",
+      "name": "Persistent Systems Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 4.4
+    },
+    {
+      "rank": 8,
+      "key": "shriram-finance-ltd",
+      "name": "Shriram Finance Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 3.7
+    },
+    {
+      "rank": 9,
+      "key": "dixon-technologies-india-ltd",
+      "name": "Dixon Technologies (India) Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 3.4
+    },
+    {
+      "rank": 10,
+      "key": "billionbrains-garage-ventures-ltd",
+      "name": "Billionbrains Garage Ventures Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 3.4
+    }
+  ]
+}

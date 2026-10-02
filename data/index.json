@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-02T06:16:57.582700+00:00",
-  "total_funds": 2,
+  "last_updated": "2026-10-02T06:40:45.495821+00:00",
+  "total_funds": 3,
   "funds": [
     {
       "id": "ppfas-flexicap",
@@ -105,6 +105,25 @@
           "weight_delta_pp": -0.4
         }
       }
+    },
+    {
+      "id": "motilal-oswal-midcap-fund",
+      "name": "Motilal Oswal Midcap Fund",
+      "amc": "Motilal Oswal",
+      "category": "Mid Cap",
+      "type": "equity",
+      "latest_month": "2026-08",
+      "latest_as_of": "2026-08-31",
+      "top10_total_pct": 54.5,
+      "top_holding": {
+        "name": "One 97 Communications Ltd.",
+        "weight_pct": 9.1
+      },
+      "months_available": [
+        "2026-08"
+      ],
+      "latest_changes_count": 0,
+      "latest_diff_summary": null
     }
   ]
 }
