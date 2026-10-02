@@ -138,7 +138,7 @@ jobs:
           git add data/
           if ! git diff --cached --quiet; then
             FUNDS_LIST="${{ steps.detect.outputs.new_fund_ids }}"
-            git commit -m "chore(data): initial backfill for new fund(s): ${FUNDS_LIST} [skip ci]"
+            git commit -m "chore(data): initial backfill for new fund(s): ${FUNDS_LIST} [skip actions]"
             git push origin main
             echo "Data committed and pushed."
           else

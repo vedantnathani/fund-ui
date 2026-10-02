@@ -98,7 +98,7 @@ jobs:
           git add data/
           # Only commit if something was actually staged
           if ! git diff --cached --quiet; then
-            git commit -m "chore(data): backfill ${{ inputs.fund_id }} ${{ inputs.start_month }}-${{ inputs.end_month }} [skip ci]"
+            git commit -m "chore(data): backfill ${{ inputs.fund_id }} ${{ inputs.start_month }}-${{ inputs.end_month }} [skip actions]"
             git push origin main
             echo "Data committed and pushed."
           else

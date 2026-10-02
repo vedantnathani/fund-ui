@@ -4,13 +4,13 @@ import { Diff, FundConfig, FundIndex, HistoryDataPoint, Snapshot } from '@/types
 
 // Statically scope data directory to public/data (mirrored by prebuild) or ../data
 function getDataDir(): string {
-  const publicData = path.join(process.cwd(), 'public', 'data');
-  if (fs.existsSync(publicData)) {
-    return publicData;
-  }
   const rootData = path.join(process.cwd(), '..', 'data');
   if (fs.existsSync(rootData)) {
     return rootData;
+  }
+  const publicData = path.join(process.cwd(), 'public', 'data');
+  if (fs.existsSync(publicData)) {
+    return publicData;
   }
   return publicData;
 }

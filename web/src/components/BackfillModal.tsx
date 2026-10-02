@@ -157,7 +157,7 @@ export default function BackfillModal({
       onClose();
       if (onSuccess) {
         onSuccess(
-          `Historical backfill dispatched for ${targetName} (${startFormatted} → ${endFormatted})!`,
+          `Backfill queued for ${targetName} (${startFormatted} → ${endFormatted}). GitHub Actions is processing the downloads in the background (~1-2 mins). Refresh the page once the action finishes to view new data.`,
           result.runUrl
         );
       }

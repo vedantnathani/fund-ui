@@ -510,7 +510,7 @@ export default function FundManager({ initialFunds }: FundManagerProps) {
   const handleAddSuccess = (newFund: FundConfig) => {
     setFunds((prev) => [...prev, newFund]);
     setShowAddModal(false);
-    showToast(`Fund '${newFund.name}' added! Backfill will run automatically.`, 'success');
+    showToast(`Fund '${newFund.name}' registered! GitHub Actions is fetching historical disclosures in the background (~1-2 mins).`, 'success');
   };
 
   const activeFunds = funds.filter((f) => f.enabled);
