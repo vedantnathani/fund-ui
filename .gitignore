@@ -29,3 +29,8 @@ web/next-env.d.ts
 # Operating System
 .DS_Store
 Thumbs.db
+
+# Cache and raw downloads
+data/cache/
+data/raw/
+

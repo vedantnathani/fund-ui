@@ -1,19 +1,15 @@
 # STATE: Mutual Fund Top-10 Holdings Tracker
 
 ## Current State
-Milestone v1.1 (Fund Manager UI & Production Deployment) — **SHIPPED** 🎉
+Milestone v1.2 (Multi-AMC Architecture & Historical Backfill) — **PHASE 14 COMPLETE** 🎉
 
 ## Next Action
-Milestone v1.1 complete. All code pushed to GitHub (https://github.com/vedantnathani/fund-ui.git). Ready to deploy to Vercel.
+Milestone v1.2 complete. Ready to deploy or add further AMCs (e.g. HDFC with custom URLs or direct links).
 
-## Active Milestone: v1.1
+## Active Milestone: v1.2
 | Phase | Name | Status |
 |-------|------|--------|
-| 9 | Backfill CLI Enhancements | ✅ Completed (commit 51fd906) |
-| 10 | GitHub Actions: Backfill & Register-Fund Workflows | ✅ Completed (commit d4abdeb) |
-| 11 | Fund Manager UI (Add / Edit / Remove Funds) | ✅ Completed (commit 79fb307) |
-| 12 | Backfill Period Picker UI | ✅ Completed (commit 58d5725) |
-| 13 | Vercel Production Deployment | ✅ Completed (commit c90d218) |
+| 14 | Modular AMC Scraper & Multi-Fund Backfill | ✅ Completed (2026-10-02) |
 
 ## Decisions Log
 | # | Decision | Rationale | Date |
@@ -36,9 +32,12 @@ Milestone v1.1 complete. All code pushed to GitHub (https://github.com/vedantnat
 | 16 | Deterministic template fallback | Pure Python fallback guarantee ensuring pipeline never crashes on API failure or quota exhaustion | 2026-10-02 |
 | 17 | GitHub API for fund config updates | UI commits to funds.json via GitHub Contents API; requires GH_PAT stored in Vercel env vars only | 2026-10-02 |
 | 18 | workflow_dispatch for on-demand backfill | UI triggers backfill via GitHub Actions API; avoids needing a server-side compute layer on Vercel | 2026-10-02 |
+| 19 | Motilal Oswal AEM document search API | Query Motilal's public `/search-documents.json` endpoint directly instead of headless browser automation | 2026-10-02 |
+| 20 | Custom direct URLs override in funds.json | Allow manual `monthly_urls` mapping for AMCs protected by Akamai WAF (like HDFC) | 2026-10-02 |
 
 ## Open Questions
 _None currently._
 
 ## Blockers
 _None currently._
+

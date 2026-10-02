@@ -136,7 +136,7 @@ def test_backfill_online_date_filter():
 
     mock_scraper = MagicMock()
     mock_scraper.fetch_page.return_value = "<html></html>"
-    mock_scraper.discover_ppfas_links.return_value = discovered
+    mock_scraper.discover_links.return_value = discovered
 
     mock_orchestrator = MagicMock()
     mock_orchestrator.get_fund.return_value = {
@@ -159,6 +159,6 @@ def test_backfill_online_date_filter():
 
     # Scraper should have been called but only July should be in valid_months
     # In dry_run mode no files are written; we verify via discover call count
-    mock_scraper.discover_ppfas_links.assert_called_once()
+    mock_scraper.discover_links.assert_called_once()
     # The scraper download_file should NOT have been called (dry_run=True)
     mock_scraper.download_file.assert_not_called()

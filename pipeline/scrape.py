@@ -56,13 +56,34 @@ def compute_sha256(file_path: Path) -> str:
 
 def parse_month_year(text: str) -> Optional[str]:
     """Extract YYYY-MM from text, url or filename."""
-    clean = text.lower()
+    from urllib.parse import unquote
+
+    clean = unquote(text).lower()
+
+    # 1. Look for patterns like 'december 2025', 'december-2025', 'december_2025'
     for month_name, mm in MONTH_NAME_TO_NUM.items():
-        if month_name in clean:
-            year_match = re.search(r"\b(20\d{2})\b", clean)
-            if year_match:
-                return f"{year_match.group(1)}-{mm}"
+        m = re.search(rf"\b{month_name}\s*[-_ ]*\s*(20\d{{2}})\b", clean)
+        if m:
+            return f"{m.group(1)}-{mm}"
+        m2 = re.search(rf"\b(20\d{{2}})\s*[-_ ]*\s*{month_name}\b", clean)
+        if m2:
+            return f"{m2.group(1)}-{mm}"
+
+    # 2. Look for YYYY-MM or YYYY_MM directly
+    m3 = re.search(r"\b(20\d{2})[-_](0[1-9]|1[0-2])\b", clean)
+    if m3:
+        return f"{m3.group(1)}-{m3.group(2)}"
+
+    # 3. Fallback: month name present + any 4-digit year in filename only
+    filename = clean.split("/")[-1]
+    for month_name, mm in MONTH_NAME_TO_NUM.items():
+        if month_name in filename:
+            y = re.search(r"\b(20\d{2})\b", filename)
+            if y:
+                return f"{y.group(1)}-{mm}"
+
     return None
+
 
 
 class Scraper:
@@ -118,6 +139,143 @@ class Scraper:
 
         sorted_items = [items[m] for m in sorted(items.keys(), reverse=True)]
         return sorted_items
+
+    def discover_motilal_links(
+        self,
+        fund_config: Dict[str, Any],
+        start_month: Optional[str] = None,
+        end_month: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        """Discover monthly factsheet PDF links from Motilal Oswal's AEM document search API."""
+        api_url = (
+            "https://www.motilaloswalmf.com/content/aem-cloud-dept-backend-motilal-oswal/api/"
+            "search-documents.json?searchQuery=factsheet&type="
+        )
+        logger.info(f"Querying Motilal Oswal document API: {api_url}")
+        try:
+            resp = self.session.get(api_url, timeout=self.timeout)
+            resp.raise_for_status()
+            data = resp.json()
+        except Exception as e:
+            logger.error(f"Failed to query Motilal document API: {e}")
+            return []
+
+        from urllib.parse import quote
+
+        items: Dict[str, Dict[str, Any]] = {}
+        for entry in data.get("results", []):
+            path = entry.get("path") or ""
+            title = entry.get("title") or ""
+            cat = entry.get("category") or ""
+            lower_path = path.lower()
+            lower_title = title.lower()
+
+            if not lower_path.endswith(".pdf"):
+                continue
+
+            # Must be a factsheet and must be active funds
+            is_factsheet = "factsheet" in lower_path or "factsheet" in cat.lower()
+            is_active = "active" in lower_path or "active" in lower_title
+            if not (is_factsheet and is_active):
+                continue
+
+            month_str = parse_month_year(path) or parse_month_year(title)
+            if not month_str:
+                continue
+
+            if start_month and month_str < start_month:
+                continue
+            if end_month and month_str > end_month:
+                continue
+
+            if month_str not in items:
+                encoded_path = quote(path, safe="/:@")
+                full_url = urljoin("https://www.motilaloswalmf.com", encoded_path)
+                items[month_str] = {
+                    "month": month_str,
+                    "excel_url": None,
+                    "pdf_url": full_url,
+                }
+
+        sorted_items = [items[m] for m in sorted(items.keys(), reverse=True)]
+        logger.info(f"Discovered {len(sorted_items)} Motilal Oswal factsheet months via API")
+        return sorted_items
+
+    def discover_custom_links(
+        self,
+        fund_config: Dict[str, Any],
+        start_month: Optional[str] = None,
+        end_month: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        """Return custom static links defined under monthly_urls in fund config."""
+        monthly_urls = fund_config.get("monthly_urls", {})
+        items: Dict[str, Dict[str, Any]] = {}
+
+        for m, val in monthly_urls.items():
+            if start_month and m < start_month:
+                continue
+            if end_month and m > end_month:
+                continue
+
+            if isinstance(val, str):
+                lower_val = val.lower()
+                items[m] = {
+                    "month": m,
+                    "excel_url": val if ".xls" in lower_val else None,
+                    "pdf_url": val if ".pdf" in lower_val else None,
+                }
+            elif isinstance(val, dict):
+                items[m] = {
+                    "month": m,
+                    "excel_url": val.get("excel") or val.get("excel_url"),
+                    "pdf_url": val.get("pdf") or val.get("pdf_url"),
+                }
+
+        return [items[m] for m in sorted(items.keys(), reverse=True)]
+
+    def discover_links(
+        self,
+        fund_config: Dict[str, Any],
+        start_month: Optional[str] = None,
+        end_month: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Polymorphic discovery routing based on fund configuration and AMC.
+        Supports PPFAS HTML parsing, Motilal Oswal AEM document search API,
+        and manual custom URL overrides in config/funds.json.
+        """
+        # 1. Custom URL override if present in config
+        if fund_config.get("monthly_urls"):
+            logger.info(f"Using custom monthly_urls for fund: {fund_config.get('id')}")
+            return self.discover_custom_links(fund_config, start_month=start_month, end_month=end_month)
+
+        amc = fund_config.get("amc", "").lower()
+
+        # 2. Motilal Oswal strategy
+        if "motilal" in amc:
+            return self.discover_motilal_links(fund_config, start_month=start_month, end_month=end_month)
+
+        # 3. PPFAS strategy (or standard HTML page scraping)
+        source_page = fund_config.get("source_page")
+        if not source_page:
+            logger.warning(f"No source_page specified for fund: {fund_config.get('id')}")
+            return []
+
+        try:
+            html = self.fetch_page(source_page)
+            links = self.discover_ppfas_links(html, source_page)
+            if start_month or end_month:
+                links = [
+                    d
+                    for d in links
+                    if (not start_month or d["month"] >= start_month)
+                    and (not end_month or d["month"] <= end_month)
+                ]
+            return links
+        except Exception as e:
+            logger.error(f"Failed to discover links from {source_page}: {e}")
+            return []
+
 
     def download_file(
         self, url: str, dest_path: Path, max_retries: int = 3, force: bool = False
@@ -177,11 +335,13 @@ def main() -> None:
     args = parser.parse_args()
 
     fund = load_fund_config(args.fund_id)
-    source_page = fund["source_page"]
 
     scraper = Scraper()
-    html = scraper.fetch_page(source_page)
-    discovered = scraper.discover_ppfas_links(html, source_page)
+    discovered = scraper.discover_links(
+        fund,
+        start_month=args.month if args.month else None,
+        end_month=args.month if args.month else None,
+    )
 
     logger.info(f"Discovered {len(discovered)} months of reports for {fund['name']}:")
 
@@ -192,6 +352,7 @@ def main() -> None:
             sys.exit(1)
     else:
         targets = discovered[:3]  # default to latest 3
+
 
     for item in targets:
         logger.info(

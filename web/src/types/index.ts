@@ -10,6 +10,7 @@ export interface FundConfig {
   parser_preference: string[];
   significant_change_pp: number;
   enabled: boolean;
+  monthly_urls?: Record<string, string | { pdf?: string; excel?: string }>;
 }
 
 export interface Holding {

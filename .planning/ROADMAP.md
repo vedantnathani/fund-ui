@@ -24,3 +24,13 @@ Add "Fetch Data" button to fund cards and fund detail page. Implement month/year
 
 ### Phase 13 — Vercel Production Deployment
 Add `vercel.json`, document all env vars, connect repo to Vercel Hobby, validate Lighthouse scores ≥ 90, update README with full deploy guide.
+
+---
+
+## Milestone v1.2 — Multi-AMC Architecture & Historical Backfill
+
+**Goal**: Decouple factsheet discovery from PPFAS, build a modular AMC scraper architecture with native Motilal Oswal AEM support and manual WAF overrides, and enable multi-month historical backfills.
+
+### Phase 14 — Modular AMC Scraper & Multi-Fund Backfill
+Implement `discover_links` router in `pipeline/scrape.py` delegating to PPFAS HTML parsing, Motilal Oswal AEM document search API, and manual `monthly_urls` overrides. Update `pipeline/backfill.py` and `pipeline/run.py` to use dynamic discovery. Add comprehensive unit tests and backfill Motilal Oswal historical months to populate MoM holding changes.
+

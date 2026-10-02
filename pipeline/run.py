@@ -69,17 +69,14 @@ def run_pipeline(
     for fund in funds:
         fid = fund["id"]
         logger.info(f"=== Checking fund: {fund['name']} ({fid}) ===")
-        source_page = fund["source_page"]
-
         try:
-            page_html = scraper.fetch_page(source_page)
-            discovered = scraper.discover_ppfas_links(page_html, source_page)
+            discovered = scraper.discover_links(fund)
         except Exception as e:
-            logger.error(f"Failed to fetch source page for {fid}: {e}")
+            logger.error(f"Failed to discover links for {fid}: {e}")
             continue
 
         if not discovered:
-            logger.warning(f"No download links found on source page for {fid}")
+            logger.warning(f"No download links found for {fid}")
             continue
 
         latest_item = discovered[0]

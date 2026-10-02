@@ -239,8 +239,7 @@ def run_online_backfill(
         fid = fund["id"]
         logger.info(f"\n=== Processing fund: {fid} ({fund.get('name', '')}) ===")
 
-        html = scraper.fetch_page(fund["source_page"])
-        discovered = scraper.discover_ppfas_links(html, fund["source_page"])
+        discovered = scraper.discover_links(fund, start_month=resolved_start, end_month=resolved_end)
 
         # Filter discovered months to requested range
         valid_months = set(month_range(resolved_start, resolved_end))

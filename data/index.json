@@ -1,5 +1,4 @@
-{
-  "last_updated": "2026-10-02T06:44:04.463934+00:00",
+  "last_updated": "2026-10-02T07:05:22.884553+00:00",
   "total_funds": 3,
   "funds": [
     {
@@ -120,10 +119,26 @@
         "weight_pct": 9.1
       },
       "months_available": [
-        "2026-08"
+        "2026-08",
+        "2026-07"
       ],
       "latest_changes_count": 0,
-      "latest_diff_summary": null
+      "latest_diff_summary": {
+        "num_entered": 0,
+        "num_exited": 0,
+        "num_increased": 4,
+        "num_decreased": 5,
+        "num_unchanged": 1,
+        "num_significant": 3,
+        "biggest_increase": {
+          "name": "One 97 Communications Ltd.",
+          "weight_delta_pp": 1.0
+        },
+        "biggest_decrease": {
+          "name": "Kalyan Jewellers India Ltd.",
+          "weight_delta_pp": -0.8
+        }
+      }
     }
   ]
 }
