@@ -1,0 +1,183 @@
+{
+  "fund_id": "motilal-oswal-midcap-fund",
+  "current_month": "2025-11",
+  "previous_month": "2025-10",
+  "as_of": "2025-11-30",
+  "prev_as_of": "2025-10-31",
+  "top10_total_pct": 71.7,
+  "prev_top10_total_pct": 73.5,
+  "top10_total_delta_pp": -1.8,
+  "entered_top10": [
+    {
+      "key": "bharti-airtel-ltd",
+      "name": "Bharti Airtel Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 7,
+      "weight_pct": 5.3
+    },
+    {
+      "key": "aditya-birla-capital-ltd",
+      "name": "Aditya Birla Capital Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 9,
+      "weight_pct": 4.5
+    }
+  ],
+  "exited_top10": [
+    {
+      "key": "trent-ltd",
+      "name": "Trent Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "prev_rank": 7,
+      "prev_weight_pct": 6.3
+    },
+    {
+      "key": "kaynes-technology-india-ltd",
+      "name": "Kaynes Technology India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "prev_rank": 9,
+      "prev_weight_pct": 4.5
+    }
+  ],
+  "retained": [
+    {
+      "key": "persistent-systems-ltd",
+      "name": "Persistent Systems Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 1,
+      "prev_rank": 1,
+      "rank_change": 0,
+      "weight_pct": 10.0,
+      "prev_weight_pct": 9.5,
+      "weight_delta_pp": 0.5,
+      "direction": "increased",
+      "significant": true
+    },
+    {
+      "key": "coforge-ltd",
+      "name": "Coforge Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 2,
+      "prev_rank": 2,
+      "rank_change": 0,
+      "weight_pct": 9.9,
+      "prev_weight_pct": 9.3,
+      "weight_delta_pp": 0.6,
+      "direction": "increased",
+      "significant": true
+    },
+    {
+      "key": "eternal-ltd",
+      "name": "Eternal Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 3,
+      "prev_rank": 5,
+      "rank_change": 2,
+      "weight_pct": 8.7,
+      "prev_weight_pct": 8.5,
+      "weight_delta_pp": 0.2,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "dixon-technologies-india-ltd",
+      "name": "Dixon Technologies (India) Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 4,
+      "prev_rank": 4,
+      "rank_change": 0,
+      "weight_pct": 8.1,
+      "prev_weight_pct": 8.7,
+      "weight_delta_pp": -0.6,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "kalyan-jewellers-india-ltd",
+      "name": "Kalyan Jewellers India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 5,
+      "prev_rank": 6,
+      "rank_change": 1,
+      "weight_pct": 8.0,
+      "prev_weight_pct": 8.2,
+      "weight_delta_pp": -0.2,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "one-97-communications-ltd",
+      "name": "One 97 Communications Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 6,
+      "prev_rank": 3,
+      "rank_change": -3,
+      "weight_pct": 7.8,
+      "prev_weight_pct": 8.7,
+      "weight_delta_pp": -0.9,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "polycab-india-ltd",
+      "name": "Polycab India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 8,
+      "prev_rank": 8,
+      "rank_change": 0,
+      "weight_pct": 5.0,
+      "prev_weight_pct": 5.5,
+      "weight_delta_pp": -0.5,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "kei-industries-ltd",
+      "name": "KEI Industries Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 10,
+      "prev_rank": 10,
+      "rank_change": 0,
+      "weight_pct": 4.4,
+      "prev_weight_pct": 4.3,
+      "weight_delta_pp": 0.1,
+      "direction": "increased",
+      "significant": false
+    }
+  ],
+  "summary": {
+    "num_entered": 2,
+    "num_exited": 2,
+    "num_increased": 4,
+    "num_decreased": 4,
+    "num_unchanged": 0,
+    "num_significant": 5,
+    "biggest_increase": {
+      "name": "Coforge Ltd.",
+      "weight_delta_pp": 0.6
+    },
+    "biggest_decrease": {
+      "name": "One 97 Communications Ltd.",
+      "weight_delta_pp": -0.9
+    }
+  },
+  "amc_commentary": null,
+  "ai_summary": {
+    "text": "In 2025-11, Motilal Oswal Midcap Fund saw 2 holdings enter the top 10 (Bharti Airtel Ltd., Aditya Birla Capital Ltd.), while Trent Ltd., Kaynes Technology India Ltd. exited. Total top-10 concentration decreased by 1.80pp from 73.50% to 71.70%. Coforge Ltd. recorded the largest weight expansion (+0.60pp), while One 97 Communications Ltd. saw the largest reduction (-0.90pp). Persistent Systems Ltd. remained the portfolio's largest single position at 10.00%.",
+    "provider": "template_fallback",
+    "verified": true,
+    "generated_at": "2026-10-02T07:25:38.718361+00:00"
+  }
+}

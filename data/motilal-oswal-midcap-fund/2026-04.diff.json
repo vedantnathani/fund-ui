@@ -1,0 +1,181 @@
+{
+  "fund_id": "motilal-oswal-midcap-fund",
+  "current_month": "2026-04",
+  "previous_month": "2026-02",
+  "as_of": "2026-04-30",
+  "prev_as_of": "2026-02-28",
+  "top10_total_pct": 56.3,
+  "prev_top10_total_pct": 59.3,
+  "top10_total_delta_pp": -3.0,
+  "entered_top10": [
+    {
+      "key": "billionbrains-garage-ventures-ltd",
+      "name": "Billionbrains Garage Ventures Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 8,
+      "weight_pct": 5.1
+    }
+  ],
+  "exited_top10": [
+    {
+      "key": "dixon-technologies-india-ltd",
+      "name": "Dixon Technologies (India) Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "prev_rank": 9,
+      "prev_weight_pct": 4.3
+    }
+  ],
+  "retained": [
+    {
+      "key": "one-97-communications-ltd",
+      "name": "One 97 Communications Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 1,
+      "prev_rank": 1,
+      "rank_change": 0,
+      "weight_pct": 7.3,
+      "prev_weight_pct": 7.6,
+      "weight_delta_pp": -0.3,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "kalyan-jewellers-india-ltd",
+      "name": "Kalyan Jewellers India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 2,
+      "prev_rank": 2,
+      "rank_change": 0,
+      "weight_pct": 7.1,
+      "prev_weight_pct": 7.5,
+      "weight_delta_pp": -0.4,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "eternal-ltd",
+      "name": "Eternal Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 3,
+      "prev_rank": 3,
+      "rank_change": 0,
+      "weight_pct": 5.8,
+      "prev_weight_pct": 6.4,
+      "weight_delta_pp": -0.6,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "coforge-ltd",
+      "name": "Coforge Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 4,
+      "prev_rank": 6,
+      "rank_change": 2,
+      "weight_pct": 5.6,
+      "prev_weight_pct": 6.1,
+      "weight_delta_pp": -0.5,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "kei-industries-ltd",
+      "name": "KEI Industries Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 5,
+      "prev_rank": 4,
+      "rank_change": -1,
+      "weight_pct": 5.5,
+      "prev_weight_pct": 6.3,
+      "weight_delta_pp": -0.8,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "persistent-systems-ltd",
+      "name": "Persistent Systems Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 6,
+      "prev_rank": 5,
+      "rank_change": -1,
+      "weight_pct": 5.4,
+      "prev_weight_pct": 6.2,
+      "weight_delta_pp": -0.8,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "aditya-birla-capital-ltd",
+      "name": "Aditya Birla Capital Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 7,
+      "prev_rank": 7,
+      "rank_change": 0,
+      "weight_pct": 5.2,
+      "prev_weight_pct": 5.7,
+      "weight_delta_pp": -0.5,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "bharti-airtel-ltd",
+      "name": "Bharti Airtel Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 9,
+      "prev_rank": 8,
+      "rank_change": -1,
+      "weight_pct": 5.0,
+      "prev_weight_pct": 5.3,
+      "weight_delta_pp": -0.3,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "multi-commodity-exchange-of-india-ltd",
+      "name": "Multi Commodity Exchange of India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 10,
+      "prev_rank": 10,
+      "rank_change": 0,
+      "weight_pct": 4.3,
+      "prev_weight_pct": 3.9,
+      "weight_delta_pp": 0.4,
+      "direction": "increased",
+      "significant": false
+    }
+  ],
+  "summary": {
+    "num_entered": 1,
+    "num_exited": 1,
+    "num_increased": 1,
+    "num_decreased": 8,
+    "num_unchanged": 0,
+    "num_significant": 5,
+    "biggest_increase": {
+      "name": "Multi Commodity Exchange of India Ltd.",
+      "weight_delta_pp": 0.4
+    },
+    "biggest_decrease": {
+      "name": "KEI Industries Ltd.",
+      "weight_delta_pp": -0.8
+    }
+  },
+  "amc_commentary": null,
+  "ai_summary": {
+    "text": "In 2026-04, Motilal Oswal Midcap Fund saw 1 holdings enter the top 10 (Billionbrains Garage Ventures Ltd.), while Dixon Technologies (India) Ltd. exited. Total top-10 concentration decreased by 3.00pp from 59.30% to 56.30%. Multi Commodity Exchange of India Ltd. recorded the largest weight expansion (+0.40pp), while KEI Industries Ltd. saw the largest reduction (-0.80pp). One 97 Communications Ltd. remained the portfolio's largest single position at 7.30%.",
+    "provider": "template_fallback",
+    "verified": true,
+    "generated_at": "2026-10-02T07:25:38.720066+00:00"
+  }
+}

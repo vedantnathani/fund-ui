@@ -1,0 +1,92 @@
+{
+  "fund_id": "motilal-oswal-midcap-fund",
+  "fund_name": "Motilal Oswal Midcap Fund",
+  "as_of": "2025-09-30",
+  "source_url": "https://www.motilaloswalmf.com/content/dam/motilal-mf/downloads/mf/factsheet/2025/oct/66af8-most-factsheet-september-2025-active.pdf",
+  "source_type": "pdf_text",
+  "file_sha256": "2cc1363ecbca70c68505511ba448f7e8e736a307c547c74916b6a35ccc681a04",
+  "top10_total_pct": 75.0,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "dixon-technologies-india-ltd",
+      "name": "Dixon Technologies (India) Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 9.6
+    },
+    {
+      "rank": 2,
+      "key": "eternal-ltd",
+      "name": "Eternal Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 9.4
+    },
+    {
+      "rank": 3,
+      "key": "coforge-ltd",
+      "name": "Coforge Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 9.0
+    },
+    {
+      "rank": 4,
+      "key": "persistent-systems-ltd",
+      "name": "Persistent Systems Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 8.3
+    },
+    {
+      "rank": 5,
+      "key": "one-97-communications-ltd",
+      "name": "One 97 Communications Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 8.1
+    },
+    {
+      "rank": 6,
+      "key": "kalyan-jewellers-india-ltd",
+      "name": "Kalyan Jewellers India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 7.8
+    },
+    {
+      "rank": 7,
+      "key": "trent-ltd",
+      "name": "Trent Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 6.7
+    },
+    {
+      "rank": 8,
+      "key": "polycab-india-ltd",
+      "name": "Polycab India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 6.6
+    },
+    {
+      "rank": 9,
+      "key": "kaynes-technology-india-ltd",
+      "name": "Kaynes Technology India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 4.8
+    },
+    {
+      "rank": 10,
+      "key": "kei-industries-ltd",
+      "name": "KEI Industries Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 4.7
+    }
+  ]
+}

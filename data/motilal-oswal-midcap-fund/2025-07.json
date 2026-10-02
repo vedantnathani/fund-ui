@@ -1,0 +1,92 @@
+{
+  "fund_id": "motilal-oswal-midcap-fund",
+  "fund_name": "Motilal Oswal Midcap Fund",
+  "as_of": "2025-07-31",
+  "source_url": "https://www.motilaloswalmf.com/content/dam/motilal-mf/downloads/mf/factsheet/2025/aug/37a31-most-factsheet-july-2025-active.pdf",
+  "source_type": "pdf_text",
+  "file_sha256": "7948adc538b8aa68256b392fcd15b17c0f728051a549db5e0bd516a34f211289",
+  "top10_total_pct": 66.5,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "dixon-technologies-india-ltd",
+      "name": "Dixon Technologies (India) Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 10.5
+    },
+    {
+      "rank": 2,
+      "key": "coforge-ltd",
+      "name": "Coforge Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 9.4
+    },
+    {
+      "rank": 3,
+      "key": "kalyan-jewellers-india-ltd",
+      "name": "Kalyan Jewellers India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 8.9
+    },
+    {
+      "rank": 4,
+      "key": "persistent-systems-ltd",
+      "name": "Persistent Systems Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 8.3
+    },
+    {
+      "rank": 5,
+      "key": "trent-ltd",
+      "name": "Trent Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 7.8
+    },
+    {
+      "rank": 6,
+      "key": "polycab-india-ltd",
+      "name": "Polycab India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 5.6
+    },
+    {
+      "rank": 7,
+      "key": "one-97-communications-ltd",
+      "name": "One 97 Communications Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 4.5
+    },
+    {
+      "rank": 8,
+      "key": "kei-industries-ltd",
+      "name": "KEI Industries Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 4.0
+    },
+    {
+      "rank": 9,
+      "key": "bharti-hexacom-ltd",
+      "name": "Bharti Hexacom Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 3.8
+    },
+    {
+      "rank": 10,
+      "key": "max-healthcare-institute-ltd",
+      "name": "Max Healthcare Institute Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 3.7
+    }
+  ]
+}

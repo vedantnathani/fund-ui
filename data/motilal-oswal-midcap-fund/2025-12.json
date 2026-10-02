@@ -1,0 +1,92 @@
+{
+  "fund_id": "motilal-oswal-midcap-fund",
+  "fund_name": "Motilal Oswal Midcap Fund",
+  "as_of": "2025-12-31",
+  "source_url": "https://www.motilaloswalmf.com/content/dam/motilal-mf/downloads/mf/factsheet/2026/jan/67301-most-factsheet-december-2025-active.pdf",
+  "source_type": "pdf_text",
+  "file_sha256": "dcb52f0eacf652ab145906dadac27e8a778d11635d2eb4993b3c48dcaabaa28e",
+  "top10_total_pct": 66.1,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "persistent-systems-ltd",
+      "name": "Persistent Systems Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 10.2
+    },
+    {
+      "rank": 2,
+      "key": "coforge-ltd",
+      "name": "Coforge Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 8.9
+    },
+    {
+      "rank": 3,
+      "key": "one-97-communications-ltd",
+      "name": "One 97 Communications Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 7.9
+    },
+    {
+      "rank": 4,
+      "key": "kalyan-jewellers-india-ltd",
+      "name": "Kalyan Jewellers India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 7.9
+    },
+    {
+      "rank": 5,
+      "key": "dixon-technologies-india-ltd",
+      "name": "Dixon Technologies (India) Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 6.9
+    },
+    {
+      "rank": 6,
+      "key": "eternal-ltd",
+      "name": "Eternal Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 5.8
+    },
+    {
+      "rank": 7,
+      "key": "bharti-airtel-ltd",
+      "name": "Bharti Airtel Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 5.4
+    },
+    {
+      "rank": 8,
+      "key": "kei-industries-ltd",
+      "name": "KEI Industries Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 4.8
+    },
+    {
+      "rank": 9,
+      "key": "aditya-birla-capital-ltd",
+      "name": "Aditya Birla Capital Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 4.6
+    },
+    {
+      "rank": 10,
+      "key": "bharti-hexacom-ltd",
+      "name": "Bharti Hexacom Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 3.7
+    }
+  ]
+}

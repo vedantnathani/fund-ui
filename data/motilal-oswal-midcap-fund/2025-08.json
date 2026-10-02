@@ -1,0 +1,92 @@
+{
+  "fund_id": "motilal-oswal-midcap-fund",
+  "fund_name": "Motilal Oswal Midcap Fund",
+  "as_of": "2025-08-31",
+  "source_url": "https://www.motilaloswalmf.com/content/dam/motilal-mf/downloads/mf/factsheet/2025/sep/92ba2-most-factsheet-august-2025-active.pdf",
+  "source_type": "pdf_text",
+  "file_sha256": "80fe62452a71bcc14fc9c9049a531765d6089dc017e7732ad65b3bc5c5d8d5c4",
+  "top10_total_pct": 77.8,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "dixon-technologies-india-ltd",
+      "name": "Dixon Technologies (India) Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 10.1
+    },
+    {
+      "rank": 2,
+      "key": "coforge-ltd",
+      "name": "Coforge Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 9.8
+    },
+    {
+      "rank": 3,
+      "key": "trent-ltd",
+      "name": "Trent Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 9.1
+    },
+    {
+      "rank": 4,
+      "key": "eternal-ltd",
+      "name": "Eternal Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 9.0
+    },
+    {
+      "rank": 5,
+      "key": "kalyan-jewellers-india-ltd",
+      "name": "Kalyan Jewellers India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 8.7
+    },
+    {
+      "rank": 6,
+      "key": "one-97-communications-ltd",
+      "name": "One 97 Communications Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 8.7
+    },
+    {
+      "rank": 7,
+      "key": "persistent-systems-ltd",
+      "name": "Persistent Systems Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 8.4
+    },
+    {
+      "rank": 8,
+      "key": "polycab-india-ltd",
+      "name": "Polycab India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 6.2
+    },
+    {
+      "rank": 9,
+      "key": "kei-industries-ltd",
+      "name": "KEI Industries Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 4.1
+    },
+    {
+      "rank": 10,
+      "key": "kaynes-technology-india-ltd",
+      "name": "Kaynes Technology India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 3.7
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "fund_id": "motilal-oswal-midcap-fund",
+  "fund_name": "Motilal Oswal Midcap Fund",
+  "as_of": "2026-02-28",
+  "source_url": "https://www.motilaloswalmf.com/content/dam/motilal-mf/downloads/mf/factsheet/2026/mar/98855-most-factsheet-february-2026-active.pdf",
+  "source_type": "pdf_text",
+  "file_sha256": "d082ad8ac0ad15e6cb0a2100ceeb75b238dab7533a2d6bc35f7c05c4de2f2787",
+  "top10_total_pct": 59.3,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "one-97-communications-ltd",
+      "name": "One 97 Communications Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 7.6
+    },
+    {
+      "rank": 2,
+      "key": "kalyan-jewellers-india-ltd",
+      "name": "Kalyan Jewellers India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 7.5
+    },
+    {
+      "rank": 3,
+      "key": "eternal-ltd",
+      "name": "Eternal Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 6.4
+    },
+    {
+      "rank": 4,
+      "key": "kei-industries-ltd",
+      "name": "KEI Industries Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 6.3
+    },
+    {
+      "rank": 5,
+      "key": "persistent-systems-ltd",
+      "name": "Persistent Systems Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 6.2
+    },
+    {
+      "rank": 6,
+      "key": "coforge-ltd",
+      "name": "Coforge Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 6.1
+    },
+    {
+      "rank": 7,
+      "key": "aditya-birla-capital-ltd",
+      "name": "Aditya Birla Capital Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 5.7
+    },
+    {
+      "rank": 8,
+      "key": "bharti-airtel-ltd",
+      "name": "Bharti Airtel Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 5.3
+    },
+    {
+      "rank": 9,
+      "key": "dixon-technologies-india-ltd",
+      "name": "Dixon Technologies (India) Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 4.3
+    },
+    {
+      "rank": 10,
+      "key": "multi-commodity-exchange-of-india-ltd",
+      "name": "Multi Commodity Exchange of India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "weight_pct": 3.9
+    }
+  ]
+}

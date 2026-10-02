@@ -1,0 +1,183 @@
+{
+  "fund_id": "motilal-oswal-midcap-fund",
+  "current_month": "2025-08",
+  "previous_month": "2025-07",
+  "as_of": "2025-08-31",
+  "prev_as_of": "2025-07-31",
+  "top10_total_pct": 77.8,
+  "prev_top10_total_pct": 66.5,
+  "top10_total_delta_pp": 11.3,
+  "entered_top10": [
+    {
+      "key": "eternal-ltd",
+      "name": "Eternal Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 4,
+      "weight_pct": 9.0
+    },
+    {
+      "key": "kaynes-technology-india-ltd",
+      "name": "Kaynes Technology India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 10,
+      "weight_pct": 3.7
+    }
+  ],
+  "exited_top10": [
+    {
+      "key": "bharti-hexacom-ltd",
+      "name": "Bharti Hexacom Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "prev_rank": 9,
+      "prev_weight_pct": 3.8
+    },
+    {
+      "key": "max-healthcare-institute-ltd",
+      "name": "Max Healthcare Institute Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "prev_rank": 10,
+      "prev_weight_pct": 3.7
+    }
+  ],
+  "retained": [
+    {
+      "key": "dixon-technologies-india-ltd",
+      "name": "Dixon Technologies (India) Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 1,
+      "prev_rank": 1,
+      "rank_change": 0,
+      "weight_pct": 10.1,
+      "prev_weight_pct": 10.5,
+      "weight_delta_pp": -0.4,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "coforge-ltd",
+      "name": "Coforge Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 2,
+      "prev_rank": 2,
+      "rank_change": 0,
+      "weight_pct": 9.8,
+      "prev_weight_pct": 9.4,
+      "weight_delta_pp": 0.4,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "trent-ltd",
+      "name": "Trent Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 3,
+      "prev_rank": 5,
+      "rank_change": 2,
+      "weight_pct": 9.1,
+      "prev_weight_pct": 7.8,
+      "weight_delta_pp": 1.3,
+      "direction": "increased",
+      "significant": true
+    },
+    {
+      "key": "kalyan-jewellers-india-ltd",
+      "name": "Kalyan Jewellers India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 5,
+      "prev_rank": 3,
+      "rank_change": -2,
+      "weight_pct": 8.7,
+      "prev_weight_pct": 8.9,
+      "weight_delta_pp": -0.2,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "one-97-communications-ltd",
+      "name": "One 97 Communications Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 6,
+      "prev_rank": 7,
+      "rank_change": 1,
+      "weight_pct": 8.7,
+      "prev_weight_pct": 4.5,
+      "weight_delta_pp": 4.2,
+      "direction": "increased",
+      "significant": true
+    },
+    {
+      "key": "persistent-systems-ltd",
+      "name": "Persistent Systems Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 7,
+      "prev_rank": 4,
+      "rank_change": -3,
+      "weight_pct": 8.4,
+      "prev_weight_pct": 8.3,
+      "weight_delta_pp": 0.1,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "polycab-india-ltd",
+      "name": "Polycab India Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 8,
+      "prev_rank": 6,
+      "rank_change": -2,
+      "weight_pct": 6.2,
+      "prev_weight_pct": 5.6,
+      "weight_delta_pp": 0.6,
+      "direction": "increased",
+      "significant": true
+    },
+    {
+      "key": "kei-industries-ltd",
+      "name": "KEI Industries Ltd.",
+      "isin": null,
+      "sector": "Equity",
+      "rank": 9,
+      "prev_rank": 8,
+      "rank_change": -1,
+      "weight_pct": 4.1,
+      "prev_weight_pct": 4.0,
+      "weight_delta_pp": 0.1,
+      "direction": "increased",
+      "significant": false
+    }
+  ],
+  "summary": {
+    "num_entered": 2,
+    "num_exited": 2,
+    "num_increased": 6,
+    "num_decreased": 2,
+    "num_unchanged": 0,
+    "num_significant": 3,
+    "biggest_increase": {
+      "name": "One 97 Communications Ltd.",
+      "weight_delta_pp": 4.2
+    },
+    "biggest_decrease": {
+      "name": "Dixon Technologies (India) Ltd.",
+      "weight_delta_pp": -0.4
+    }
+  },
+  "amc_commentary": null,
+  "ai_summary": {
+    "text": "In 2025-08, Motilal Oswal Midcap Fund saw 2 holdings enter the top 10 (Eternal Ltd., Kaynes Technology India Ltd.), while Bharti Hexacom Ltd., Max Healthcare Institute Ltd. exited. Total top-10 concentration increased by 11.30pp from 66.50% to 77.80%. One 97 Communications Ltd. recorded the largest weight expansion (+4.20pp), while Dixon Technologies (India) Ltd. saw the largest reduction (-0.40pp). Dixon Technologies (India) Ltd. remained the portfolio's largest single position at 10.10%.",
+    "provider": "template_fallback",
+    "verified": true,
+    "generated_at": "2026-10-02T07:25:38.716688+00:00"
+  }
+}
