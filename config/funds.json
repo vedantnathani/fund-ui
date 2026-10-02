@@ -45,6 +45,6 @@
       "excel"
     ],
     "significant_change_pp": 0.5,
-    "enabled": true
+    "enabled": false
   }
 ]
