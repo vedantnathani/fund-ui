@@ -62,7 +62,9 @@ jobs:
 
       - name: Run test suite
         run: |
-          pytest pipeline/tests/ -v
+          python -m pytest pipeline/tests/ -v
+        env:
+          PYTHONPATH: .
 
       - name: Execute Pipeline Runner
         id: pipeline_step
