@@ -1,0 +1,181 @@
+{
+  "fund_id": "ppfas-flexicap",
+  "current_month": "2025-04",
+  "previous_month": "2025-03",
+  "as_of": "2025-04-30",
+  "prev_as_of": "2025-03-31",
+  "top10_total_pct": 51.03,
+  "prev_top10_total_pct": 51.68,
+  "top10_total_delta_pp": -0.65,
+  "entered_top10": [
+    {
+      "key": "INE101A01026",
+      "name": "Mahindra & Mahindra Ltd.",
+      "isin": "INE101A01026",
+      "sector": "Automobiles",
+      "rank": 9,
+      "weight_pct": 3.28
+    }
+  ],
+  "exited_top10": [
+    {
+      "key": "INE860A01027",
+      "name": "HCL Technologies Ltd.",
+      "isin": "INE860A01027",
+      "sector": "IT - Software",
+      "prev_rank": 10,
+      "prev_weight_pct": 3.19
+    }
+  ],
+  "retained": [
+    {
+      "key": "INE040A01034",
+      "name": "HDFC Bank Ltd.",
+      "isin": "INE040A01034",
+      "sector": "Banks",
+      "rank": 1,
+      "prev_rank": 1,
+      "rank_change": 0,
+      "weight_pct": 8.36,
+      "prev_weight_pct": 8.38,
+      "weight_delta_pp": -0.02,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "INE118A01012",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": "INE118A01012",
+      "sector": "Finance",
+      "rank": 2,
+      "prev_rank": 2,
+      "rank_change": 0,
+      "weight_pct": 6.46,
+      "prev_weight_pct": 7.1,
+      "weight_delta_pp": -0.64,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "INE752E01010",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": "INE752E01010",
+      "sector": "Power",
+      "rank": 3,
+      "prev_rank": 4,
+      "rank_change": 1,
+      "weight_pct": 6.04,
+      "prev_weight_pct": 5.99,
+      "weight_delta_pp": 0.05,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "INE522F01014",
+      "name": "Coal India Ltd.",
+      "isin": "INE522F01014",
+      "sector": "Consumable Fuels",
+      "rank": 4,
+      "prev_rank": 3,
+      "rank_change": -1,
+      "weight_pct": 5.8,
+      "prev_weight_pct": 6.01,
+      "weight_delta_pp": -0.21,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "INE090A01021",
+      "name": "ICICI Bank Ltd.",
+      "isin": "INE090A01021",
+      "sector": "Banks",
+      "rank": 5,
+      "prev_rank": 5,
+      "rank_change": 0,
+      "weight_pct": 5.07,
+      "prev_weight_pct": 5.05,
+      "weight_delta_pp": 0.02,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "INE154A01025",
+      "name": "ITC Ltd.",
+      "isin": "INE154A01025",
+      "sector": "Diversified FMCG",
+      "rank": 6,
+      "prev_rank": 7,
+      "rank_change": 1,
+      "weight_pct": 4.55,
+      "prev_weight_pct": 4.44,
+      "weight_delta_pp": 0.11,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "INE237A01028",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "isin": "INE237A01028",
+      "sector": "Banks",
+      "rank": 7,
+      "prev_rank": 6,
+      "rank_change": -1,
+      "weight_pct": 4.43,
+      "prev_weight_pct": 4.59,
+      "weight_delta_pp": -0.16,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "INE585B01010",
+      "name": "Maruti Suzuki India Ltd.",
+      "isin": "INE585B01010",
+      "sector": "Automobiles",
+      "rank": 8,
+      "prev_rank": 8,
+      "rank_change": 0,
+      "weight_pct": 3.76,
+      "prev_weight_pct": 3.72,
+      "weight_delta_pp": 0.04,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "INE238A01034",
+      "name": "Axis Bank Ltd.",
+      "isin": "INE238A01034",
+      "sector": "Banks",
+      "rank": 10,
+      "prev_rank": 9,
+      "rank_change": -1,
+      "weight_pct": 3.28,
+      "prev_weight_pct": 3.21,
+      "weight_delta_pp": 0.07,
+      "direction": "increased",
+      "significant": false
+    }
+  ],
+  "summary": {
+    "num_entered": 1,
+    "num_exited": 1,
+    "num_increased": 5,
+    "num_decreased": 4,
+    "num_unchanged": 0,
+    "num_significant": 1,
+    "biggest_increase": {
+      "name": "ITC Ltd.",
+      "weight_delta_pp": 0.11
+    },
+    "biggest_decrease": {
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "weight_delta_pp": -0.64
+    }
+  },
+  "amc_commentary": null,
+  "ai_summary": {
+    "text": "In 2025-04, Parag Parikh Flexi Cap Fund saw 1 holdings enter the top 10 (Mahindra & Mahindra Ltd.), while HCL Technologies Ltd. exited. Total top-10 concentration decreased by 0.65pp from 51.68% to 51.03%. ITC Ltd. recorded the largest weight expansion (+0.11pp), while Bajaj Holdings & Investment Ltd. saw the largest reduction (-0.64pp). HDFC Bank Ltd. remained the portfolio's largest single position at 8.36%.",
+    "provider": "template_fallback",
+    "verified": true,
+    "generated_at": "2026-10-02T03:26:21.418651+00:00"
+  }
+}

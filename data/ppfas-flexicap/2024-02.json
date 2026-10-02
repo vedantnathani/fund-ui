@@ -1,0 +1,92 @@
+{
+  "fund_id": "ppfas-flexicap",
+  "fund_name": "Parag Parikh Flexi Cap Fund",
+  "as_of": "2024-02-29",
+  "source_url": "https://amc.ppfas.com/downloads/portfolio-disclosure/2024/PPFAS_Monthly_Portfolio_Report_February_29_2024.xlsx?14032024_21",
+  "source_type": "excel",
+  "file_sha256": "4351b795c32c2ad040885de758b0f93f43f9fda9e677114422a63f8a507ab65f",
+  "top10_total_pct": 55.71,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "INE040A01034",
+      "name": "HDFC Bank Ltd.",
+      "isin": "INE040A01034",
+      "sector": "Banks",
+      "weight_pct": 7.93
+    },
+    {
+      "rank": 2,
+      "key": "INE118A01012",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": "INE118A01012",
+      "sector": "Finance",
+      "weight_pct": 7.23
+    },
+    {
+      "rank": 3,
+      "key": "INE752E01010",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": "INE752E01010",
+      "sector": "Power",
+      "weight_pct": 6.13
+    },
+    {
+      "rank": 4,
+      "key": "INE585B01010",
+      "name": "Maruti Suzuki India Ltd.",
+      "isin": "INE585B01010",
+      "sector": "Automobiles",
+      "weight_pct": 5.29
+    },
+    {
+      "rank": 5,
+      "key": "INE860A01027",
+      "name": "HCL Technologies Ltd.",
+      "isin": "INE860A01027",
+      "sector": "IT - Software",
+      "weight_pct": 5.28
+    },
+    {
+      "rank": 6,
+      "key": "INE522F01014",
+      "name": "Coal India Ltd.",
+      "isin": "INE522F01014",
+      "sector": "Consumable Fuels",
+      "weight_pct": 5.14
+    },
+    {
+      "rank": 7,
+      "key": "INE090A01021",
+      "name": "ICICI Bank Ltd.",
+      "isin": "INE090A01021",
+      "sector": "Banks",
+      "weight_pct": 5.13
+    },
+    {
+      "rank": 8,
+      "key": "INE154A01025",
+      "name": "ITC Ltd.",
+      "isin": "INE154A01025",
+      "sector": "Diversified FMCG",
+      "weight_pct": 4.99
+    },
+    {
+      "rank": 9,
+      "key": "INE238A01034",
+      "name": "Axis Bank Ltd.",
+      "isin": "INE238A01034",
+      "sector": "Banks",
+      "weight_pct": 4.32
+    },
+    {
+      "rank": 10,
+      "key": "US5949181045",
+      "name": "Microsoft Corp.",
+      "isin": "US5949181045",
+      "sector": "Internet and Technology",
+      "weight_pct": 4.27
+    }
+  ]
+}

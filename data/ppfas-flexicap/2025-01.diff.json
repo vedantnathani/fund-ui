@@ -1,0 +1,181 @@
+{
+  "fund_id": "ppfas-flexicap",
+  "current_month": "2025-01",
+  "previous_month": "2024-12",
+  "as_of": "2025-01-31",
+  "prev_as_of": "2024-12-31",
+  "top10_total_pct": 53.15,
+  "prev_top10_total_pct": 52.72,
+  "top10_total_delta_pp": 0.43,
+  "entered_top10": [
+    {
+      "key": "US30303M1027",
+      "name": "Meta Platforms Inc.",
+      "isin": "US30303M1027",
+      "sector": "Computer Software: Programming, Data Processing",
+      "rank": 9,
+      "weight_pct": 3.93
+    }
+  ],
+  "exited_top10": [
+    {
+      "key": "INE860A01027",
+      "name": "HCL Technologies Ltd.",
+      "isin": "INE860A01027",
+      "sector": "IT - Software",
+      "prev_rank": 7,
+      "prev_weight_pct": 4.1
+    }
+  ],
+  "retained": [
+    {
+      "key": "INE040A01034",
+      "name": "HDFC Bank Ltd.",
+      "isin": "INE040A01034",
+      "sector": "Banks",
+      "rank": 1,
+      "prev_rank": 1,
+      "rank_change": 0,
+      "weight_pct": 8.11,
+      "prev_weight_pct": 8.04,
+      "weight_delta_pp": 0.07,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "INE118A01012",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": "INE118A01012",
+      "sector": "Finance",
+      "rank": 2,
+      "prev_rank": 2,
+      "rank_change": 0,
+      "weight_pct": 6.85,
+      "prev_weight_pct": 7.22,
+      "weight_delta_pp": -0.37,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "INE752E01010",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": "INE752E01010",
+      "sector": "Power",
+      "rank": 3,
+      "prev_rank": 3,
+      "rank_change": 0,
+      "weight_pct": 6.24,
+      "prev_weight_pct": 6.54,
+      "weight_delta_pp": -0.3,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "INE522F01014",
+      "name": "Coal India Ltd.",
+      "isin": "INE522F01014",
+      "sector": "Consumable Fuels",
+      "rank": 4,
+      "prev_rank": 4,
+      "rank_change": 0,
+      "weight_pct": 6.15,
+      "prev_weight_pct": 5.76,
+      "weight_delta_pp": 0.39,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "INE154A01025",
+      "name": "ITC Ltd.",
+      "isin": "INE154A01025",
+      "sector": "Diversified FMCG",
+      "rank": 5,
+      "prev_rank": 5,
+      "rank_change": 0,
+      "weight_pct": 4.94,
+      "prev_weight_pct": 5.47,
+      "weight_delta_pp": -0.53,
+      "direction": "decreased",
+      "significant": true
+    },
+    {
+      "key": "INE090A01021",
+      "name": "ICICI Bank Ltd.",
+      "isin": "INE090A01021",
+      "sector": "Banks",
+      "rank": 6,
+      "prev_rank": 6,
+      "rank_change": 0,
+      "weight_pct": 4.89,
+      "prev_weight_pct": 4.93,
+      "weight_delta_pp": -0.04,
+      "direction": "decreased",
+      "significant": false
+    },
+    {
+      "key": "INE237A01028",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "isin": "INE237A01028",
+      "sector": "Banks",
+      "rank": 7,
+      "prev_rank": 10,
+      "rank_change": 3,
+      "weight_pct": 4.19,
+      "prev_weight_pct": 3.41,
+      "weight_delta_pp": 0.78,
+      "direction": "increased",
+      "significant": true
+    },
+    {
+      "key": "INE585B01010",
+      "name": "Maruti Suzuki India Ltd.",
+      "isin": "INE585B01010",
+      "sector": "Automobiles",
+      "rank": 8,
+      "prev_rank": 8,
+      "rank_change": 0,
+      "weight_pct": 4.14,
+      "prev_weight_pct": 3.77,
+      "weight_delta_pp": 0.37,
+      "direction": "increased",
+      "significant": false
+    },
+    {
+      "key": "US02079K3059",
+      "name": "Alphabet Inc.",
+      "isin": "US02079K3059",
+      "sector": "Computer Software: Programming, Data Processing",
+      "rank": 10,
+      "prev_rank": 9,
+      "rank_change": -1,
+      "weight_pct": 3.71,
+      "prev_weight_pct": 3.48,
+      "weight_delta_pp": 0.23,
+      "direction": "increased",
+      "significant": false
+    }
+  ],
+  "summary": {
+    "num_entered": 1,
+    "num_exited": 1,
+    "num_increased": 5,
+    "num_decreased": 4,
+    "num_unchanged": 0,
+    "num_significant": 2,
+    "biggest_increase": {
+      "name": "Kotak Mahindra Bank Ltd.",
+      "weight_delta_pp": 0.78
+    },
+    "biggest_decrease": {
+      "name": "ITC Ltd.",
+      "weight_delta_pp": -0.53
+    }
+  },
+  "amc_commentary": null,
+  "ai_summary": {
+    "text": "In 2025-01, Parag Parikh Flexi Cap Fund saw 1 holdings enter the top 10 (Meta Platforms Inc.), while HCL Technologies Ltd. exited. Total top-10 concentration increased by 0.43pp from 52.72% to 53.15%. Kotak Mahindra Bank Ltd. recorded the largest weight expansion (+0.78pp), while ITC Ltd. saw the largest reduction (-0.53pp). HDFC Bank Ltd. remained the portfolio's largest single position at 8.11%.",
+    "provider": "template_fallback",
+    "verified": true,
+    "generated_at": "2026-10-02T03:26:21.415893+00:00"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "fund_id": "ppfas-flexicap",
+  "fund_name": "Parag Parikh Flexi Cap Fund",
+  "as_of": "2024-09-30",
+  "source_url": "https://amc.ppfas.com/downloads/portfolio-disclosure/2024/PPFAS_Monthly_Portfolio_Report_September_30_2024.xlsx?11102024",
+  "source_type": "excel",
+  "file_sha256": "3e3e042999376a955dc436ff908ab19e39421062fe1239746cd621825bb59bb1",
+  "top10_total_pct": 54.78,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "INE040A01034",
+      "name": "HDFC Bank Ltd.",
+      "isin": "INE040A01034",
+      "sector": "Banks",
+      "weight_pct": 8.13
+    },
+    {
+      "rank": 2,
+      "key": "INE752E01010",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": "INE752E01010",
+      "sector": "Power",
+      "weight_pct": 7.29
+    },
+    {
+      "rank": 3,
+      "key": "INE118A01012",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": "INE118A01012",
+      "sector": "Finance",
+      "weight_pct": 6.72
+    },
+    {
+      "rank": 4,
+      "key": "INE522F01014",
+      "name": "Coal India Ltd.",
+      "isin": "INE522F01014",
+      "sector": "Consumable Fuels",
+      "weight_pct": 6.04
+    },
+    {
+      "rank": 5,
+      "key": "INE154A01025",
+      "name": "ITC Ltd.",
+      "isin": "INE154A01025",
+      "sector": "Diversified FMCG",
+      "weight_pct": 5.55
+    },
+    {
+      "rank": 6,
+      "key": "INE090A01021",
+      "name": "ICICI Bank Ltd.",
+      "isin": "INE090A01021",
+      "sector": "Banks",
+      "weight_pct": 5.11
+    },
+    {
+      "rank": 7,
+      "key": "INE585B01010",
+      "name": "Maruti Suzuki India Ltd.",
+      "isin": "INE585B01010",
+      "sector": "Automobiles",
+      "weight_pct": 4.89
+    },
+    {
+      "rank": 8,
+      "key": "INE860A01027",
+      "name": "HCL Technologies Ltd.",
+      "isin": "INE860A01027",
+      "sector": "IT - Software",
+      "weight_pct": 4.08
+    },
+    {
+      "rank": 9,
+      "key": "INE238A01034",
+      "name": "Axis Bank Ltd.",
+      "isin": "INE238A01034",
+      "sector": "Banks",
+      "weight_pct": 3.53
+    },
+    {
+      "rank": 10,
+      "key": "US30303M1027",
+      "name": "Meta Platforms Inc.",
+      "isin": "US30303M1027",
+      "sector": "Computer Software: Programming, Data Processing",
+      "weight_pct": 3.44
+    }
+  ]
+}

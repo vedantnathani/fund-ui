@@ -1,0 +1,92 @@
+{
+  "fund_id": "ppfas-flexicap",
+  "fund_name": "Parag Parikh Flexi Cap Fund",
+  "as_of": "2024-05-31",
+  "source_url": "https://amc.ppfas.com/downloads/portfolio-disclosure/2024/PPFAS_Monthly_Portfolio_Report_May_31_2024.xlsx?10062024",
+  "source_type": "excel",
+  "file_sha256": "2a9a0b98d66394cbf65e6416f845897ab58f201444e0a06c7a713f3af1377915",
+  "top10_total_pct": 53.86,
+  "amc_commentary": null,
+  "holdings": [
+    {
+      "rank": 1,
+      "key": "INE040A01034",
+      "name": "HDFC Bank Ltd.",
+      "isin": "INE040A01034",
+      "sector": "Banks",
+      "weight_pct": 8.42
+    },
+    {
+      "rank": 2,
+      "key": "INE752E01010",
+      "name": "Power Grid Corp of India Ltd.",
+      "isin": "INE752E01010",
+      "sector": "Power",
+      "weight_pct": 6.35
+    },
+    {
+      "rank": 3,
+      "key": "INE118A01012",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "isin": "INE118A01012",
+      "sector": "Finance",
+      "weight_pct": 6.03
+    },
+    {
+      "rank": 4,
+      "key": "INE154A01025",
+      "name": "ITC Ltd.",
+      "isin": "INE154A01025",
+      "sector": "Diversified FMCG",
+      "weight_pct": 5.45
+    },
+    {
+      "rank": 5,
+      "key": "INE522F01014",
+      "name": "Coal India Ltd.",
+      "isin": "INE522F01014",
+      "sector": "Consumable Fuels",
+      "weight_pct": 5.35
+    },
+    {
+      "rank": 6,
+      "key": "INE585B01010",
+      "name": "Maruti Suzuki India Ltd.",
+      "isin": "INE585B01010",
+      "sector": "Automobiles",
+      "weight_pct": 5.16
+    },
+    {
+      "rank": 7,
+      "key": "INE090A01021",
+      "name": "ICICI Bank Ltd.",
+      "isin": "INE090A01021",
+      "sector": "Banks",
+      "weight_pct": 5.07
+    },
+    {
+      "rank": 8,
+      "key": "INE238A01034",
+      "name": "Axis Bank Ltd.",
+      "isin": "INE238A01034",
+      "sector": "Banks",
+      "weight_pct": 4.14
+    },
+    {
+      "rank": 9,
+      "key": "US02079K3059",
+      "name": "Alphabet Inc.",
+      "isin": "US02079K3059",
+      "sector": "Computer Software: Programming, Data Processing",
+      "weight_pct": 4.06
+    },
+    {
+      "rank": 10,
+      "key": "US5949181045",
+      "name": "Microsoft Corp.",
+      "isin": "US5949181045",
+      "sector": "Computer Software: Prepackaged Software",
+      "weight_pct": 3.83
+    }
+  ]
+}
